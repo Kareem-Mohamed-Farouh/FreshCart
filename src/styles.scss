@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn-main {
+  @apply disabled:bg-gray-500  bg-green-600 border  border-green-700  text-white px-8 py-2 rounded-lg;
+}
+body {
+  font-family: "Open Sans", serif;
+}

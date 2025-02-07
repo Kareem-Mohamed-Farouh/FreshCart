@@ -1,0 +1,97 @@
+<section class="border relative py-6  px-10 rounded-md max-sm-w-8/12 bg-gray-50 shadow-sm  mx-auto">
+
+    <div [class.hidden]="isload" class="  w-[100%] h-[100%] flex   justify-center items-center   z-20">
+        <span class="loader"></span>
+    </div>
+
+    <h1 class="my-2 text-3xl text-center font-sans  text-green-800"><i>Login NOW</i></h1>
+    <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+
+
+        @let emailControl= loginForm.get('email');
+
+        <div class="mb-2">
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email :</label>
+            <input type="email" id="email" formControlName="email"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+
+
+            @if( emailControl?.errors && emailControl?.touched){
+            <div class="mt-1 flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Danger</span>
+                <div>
+                    <span class="font-medium">Messege Error :</span>
+                    <ul class="mt-1.5 list-disc list-inside">
+                        @if( emailControl?.getError('required')){
+                        <li>Email Is required </li>
+                        }
+                        @else if( emailControl?.getError('email')){
+                        <li>write a Correct format of Email </li>
+                        <li> User Email Name{{specialCar}}gmail.com</li>
+                        <li> EX : MohamedSaid2025{{specialCar}}gmail.com</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            }
+        </div>
+
+
+        <div class="mb-2">
+            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password
+                :</label>
+            <input type="email" id="password" formControlName="password"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+
+
+            @let passwordControl= loginForm.get('password');
+            @if(passwordControl?.errors && passwordControl?.touched){
+            <div class="mt-1 flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Danger</span>
+                <div>
+                    <span class="font-medium">Messege Error :</span>
+                    <ul class="mt-1.5 list-disc list-inside">
+                        @if(passwordControl?.getError('required'))
+                        {
+                        <li>password Is required </li>
+                        }@else if(passwordControl?.getError('pattern')){
+                        <li>Enter Valid Pattern </li>
+                        <li>EX: Ahmed234save </li>
+                        }
+
+
+                    </ul>
+                </div>
+            </div>
+            }
+
+
+
+
+        </div>
+
+
+        <button type="submit" [disabled]="isLoading" class=" mb-4 btn-main  hover:bg-green-800">Login
+            @if(isLoading){
+            <i class="ms-2 fas fa-spin fa-spinner"></i>}
+        </button>
+    </form>
+
+
+
+
+
+
+</section>
