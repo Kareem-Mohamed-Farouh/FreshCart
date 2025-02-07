@@ -7,9 +7,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../core/services/auth/auth.service';
-import { log } from 'node:console';
-import { routes } from '../../app.routes';
+
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-register',
   imports: [ReactiveFormsModule],
@@ -71,6 +71,7 @@ export class RegisterComponent {
           error: (err) => {
             // window.alert(err.error.message);
             console.log(err.error.message);
+
             this.isLoading = false;
           },
         });
