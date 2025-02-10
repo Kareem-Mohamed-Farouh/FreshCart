@@ -1,33 +1,43 @@
 import { Component, inject } from '@angular/core';
 import {
+  FormBuilder,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../core/services/auth/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   specialCar: string = '@';
   isload: boolean = true;
+  isLoading: boolean = false;
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
-
-  loginForm: FormGroup = new FormGroup({
-    email: new FormControl(null, [Validators.email, Validators.required]),
-    password: new FormControl(null, [
-      Validators.required,
-      Validators.pattern(/^[A-Z]\w{7,}$/),
-    ]),
+  private readonly formBuilder = inject(FormBuilder);
+  //**********refactoring***********
+  loginForm: FormGroup = this.formBuilder.group({
+    email: [null, [Validators.email, Validators.required]],
+    password: [
+      null,
+      [Validators.required, Validators.pattern(/^[A-Z]\w{7,}$/)],
+    ],
   });
-  isLoading: boolean = false;
+
+  // loginForm: FormGroup = new FormGroup({
+  //   email: new FormControl(null, [Validators.email, Validators.required]),
+  //   password: new FormControl(null, [
+  //     Validators.required,
+  //     Validators.pattern(/^[A-Z]\w{7,}$/),
+  //   ]),
+  // });
   submitForm() {
     if (this.loginForm.valid) {
       (this.isLoading = true), (this.isload = false);

@@ -11,7 +11,8 @@
             <ul class="  flex flex-col p-3   font-medium    md:space-x-1 rtl:space-x-reverse md:flex-row md:mt-0    ">
                 <li>
                     <a routerLink="/home" routerLinkActive="text-white bg-green-800  "
-                        class="block transition-all duration-500   hover:bg-green-800 hover:text-white   rounded   px-3 py-2    dark:text-gray-50  dark:hover:bg-gray-700   ">Home</a>
+                        class="block transition-all duration-500   hover:bg-green-800 hover:text-white   rounded   px-3 py-2    dark:text-gray-50  dark:hover:bg-gray-700 "
+                        aria-current="page">Home</a>
                 </li>
                 <li>
                     <a routerLink="/products" routerLinkActive="text-white bg-green-800  "
@@ -29,20 +30,19 @@
                     <a routerLink="/brands" routerLinkActive="text-white bg-green-800 "
                         class="block transition-all duration-500 hover:bg-green-800 hover:text-white text-gray-900 rounded   px-3 py-2     dark:text-gray-50  dark:hover:bg-gray-700   ">Brands</a>
                 </li>
+
+                <div class="md:hidden  items-center  flex text-xl gap-5 me-4 ">
+                    <a href=""><i class="dark:text-blue-400 text-blue-700  fa-brands fa-facebook"></i></a>
+                    <a href=""><i class=" dark:text-blue-400 text-blue-700 fa-brands fa-linkedin"></i></a>
+                    <a href=""><i class="dark:text-red-500  text-red-700 fa-brands fa-instagram"></i></a>
+                    <a href=""><i class=" dark:text-white  text-black fa-brands fa-tiktok"></i></a>
+                </div>
             </ul>
         </div>
-        <button data-collapse-toggle="navbar-sticky" type="button"
-            class="order-1 inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden  focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-50-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-            aria-controls="navbar-sticky" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
-            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M1 1h15M1 7h15M1 13h15" />
-            </svg>
-        </button>
+
         }
-        <div class="  ms-auto flex md:order-2 items-center space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <div class="max-sm:hidden    flex text-xl gap-5 me-4 ">
+        <div class="ms-auto flex md:order-2 items-center space-x-3 md:space-x-0 rtl:space-x-reverse">
+            <div class="max-lg:hidden    flex text-xl gap-5 me-4 ">
                 <a href=""><i class="dark:text-blue-400 text-blue-700  fa-brands fa-facebook"></i></a>
                 <a href=""><i class=" dark:text-blue-400 text-blue-700 fa-brands fa-linkedin"></i></a>
                 <a href=""><i class="dark:text-red-500  text-red-700 fa-brands fa-instagram"></i></a>
@@ -53,25 +53,36 @@
 
                 @if(!isLogin()){
 
-                <a routerLink="/register" routerLinkActive="text-green-500" role="button"
-                    class="dark:text-white  transition-all duration-300 hover:text-green-800  ">Register</a>
+                <a routerLink="/register" routerLinkActive="text-white bg-green-800  " role="button"
+                    class=" px-3 py-2 rounded  ">Register</a>
                 <div class="dark:bg-white w-[1px] bg-black mx-2"></div>
-                <a routerLink="/login" routerLinkActive="text-green-500 " role="button"
-                    class=" dark:text-white transition-all duration-300 hover:text-green-800   ms-2">Login
+                <a routerLink="/login" routerLinkActive="text-white bg-green-800  " role="button"
+                    class=" px-3 py-2 rounded   ms-2">Login
                 </a>
                 }
                 @else {
 
                 <a role="button" (click)="authService.logoutUser()"
-                    class="bg-gray-500 px-3 text-white mas-sm:px-1 max-sm:py-1 py-2  rounded hover:bg-red-600   dark:text-white transition-all duration-300 hover:text-green-950   ">LogOut</a>
+                    class="bg-gray-500 px-3 text-white mas-sm:px-1 max-sm:py-1 py-2 my-2  rounded hover:bg-red-600   dark:text-white transition-all duration-300 hover:text-green-950   ">LogOut</a>
                 }
             </div>
 
 
-
-
-
         </div>
+        <button data-collapse-toggle="navbar-sticky" type="button"
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-sticky" aria-expanded="false">
+            <span class="sr-only">Open main menu</span>
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M1 1h15M1 7h15M1 13h15" />
+            </svg>
+        </button>
 
     </div>
+
+
+
+
+
 </nav>

@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   constructor(private readonly httpClient: HttpClient) {}
   private readonly router = inject(Router);
+
   sendRegiserForm(data: object): Observable<any> {
     return this.httpClient.post(
       `${environment.baseUrl}/api/v1/auth/signup`,
@@ -26,11 +27,13 @@ export class AuthService {
     );
   }
 
+  // object have information of user
   userData: any;
-
   getUserData(): void {
-    this.userData = jwtDecode(localStorage.getItem('token')!);
-    console.log(this.userData);
+    if (localStorage.getItem('token') !== null) {
+      this.userData = jwtDecode(localStorage.getItem('token')!);
+      console.log(this.userData);
+    }
   }
 
   logoutUser(): void {

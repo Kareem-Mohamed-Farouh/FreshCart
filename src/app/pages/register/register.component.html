@@ -1,4 +1,4 @@
-<section class="border    max-sm:mt-2 px-10 rounded-md sm:w-8/12 bg-gray-50 shadow-sm  mx-auto">
+<section class="border    max-sm:mt-2 my-5 px-10 rounded-md sm:w-8/12 bg-gray-50 shadow-sm  mx-auto">
     @let nameControl= registerForm.get('name');
     @let emailControl= registerForm.get('email');
     @let passwordControl= registerForm.get('password');
@@ -247,5 +247,8 @@
         </button>
         @if(isLoading){
         <div class="w-full px-3 py-5 font-medium text-white mb-5 text-center  bg-red-600"> Account Already Exists</div>}
+
+        <p class="mb-2 capitalize">If You have account click to <a routerLink="/login"
+                class=" cursor-pointer text-green-600">sign In now?</a></p>
     </form>
 </section>

@@ -32,13 +32,14 @@ export const routes: Routes = [
   {
     path: '',
     component: BlankLayoutComponent,
+    canActivate: [authguardGuard],
+
     children: [
       {
         path: 'home',
         loadComponent: () =>
           import('./pages/home/home.component').then((c) => c.HomeComponent),
         title: 'Home',
-        canActivate: [authguardGuard],
       },
       {
         path: 'brands',
@@ -47,14 +48,12 @@ export const routes: Routes = [
             (c) => c.BrandsComponent
           ),
         title: 'Brands',
-        canActivate: [authguardGuard],
       },
       {
         path: 'cart',
         loadComponent: () =>
           import('./pages/cart/cart.component').then((c) => c.CartComponent),
         title: 'Cart',
-        canActivate: [authguardGuard],
       },
       {
         path: 'categories',
@@ -63,7 +62,6 @@ export const routes: Routes = [
             (c) => c.CategoriesComponent
           ),
         title: 'Categories',
-        canActivate: [authguardGuard],
       },
       {
         path: 'products',
@@ -72,7 +70,15 @@ export const routes: Routes = [
             (c) => c.ProductsComponent
           ),
         title: 'Products',
-        canActivate: [authguardGuard],
+      },
+
+      {
+        path: 'details/:detailsId',
+        loadComponent: () =>
+          import('./pages/details/details.component').then(
+            (c) => c.DetailsComponent
+          ),
+        title: 'details',
       },
       { path: '**', component: NotfoundComponent, title: '404 Not Found' },
     ],

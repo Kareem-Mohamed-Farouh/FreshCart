@@ -21,7 +21,7 @@ export class NavbarComponent {
   }
 
   readonly authService = inject(AuthService);
-  // OR
+  // // OR
   //  private readonly authService = inject(AuthService);
   // loguot() {
   //   this.authService.logoutUser();

@@ -1,0 +1,17 @@
+<div>
+    <owl-carousel-o [options]="customOptions">
+        @for (img of slides; track $index) {
+        <ng-template carouselSlide>
+
+            <div class="w-70%  md:grid-cols-[70%_minmax(0,1fr)]">
+                <img [src]="img" [alt]="img">
+            </div>
+            <div>
+                <img src="/public/" alt="">
+                <img src="" alt="">
+            </div>
+        </ng-template>
+        }
+
+    </owl-carousel-o>
+</div>
