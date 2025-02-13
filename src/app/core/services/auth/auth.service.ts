@@ -74,10 +74,5 @@ export class AuthService {
     );
   }
 
-  // updateLoggedUserData(userData: object): Observable<any> {
-  //   return this.httpClient.put(
-  //     `${environment.baseUrl} /api/v1/users/updateMe/`,
-  //     userData,headers: {[]},
-  //   );
-  // }
+
 }

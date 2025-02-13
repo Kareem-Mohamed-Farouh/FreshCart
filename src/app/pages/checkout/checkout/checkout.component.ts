@@ -9,6 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { subscribeOn } from 'rxjs';
 
 @Component({
   selector: 'app-checkout',
@@ -30,10 +31,12 @@ export class CheckoutComponent implements OnInit {
   idCart: string = '';
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe((res) => {
-      // console.log(res);
-      this.idCart = res.get('idCart')!;
-    });
+    //  this.activatedRoute.paramMap.subscribe({
+    //    next: (res) => {
+    //      console.log(res);
+    //      this.idCart = res.get('idCart')!;
+    //    },
+    //  });
   }
 
   checkoutform: FormGroup = this.formBuilder.group({
@@ -47,19 +50,26 @@ export class CheckoutComponent implements OnInit {
 
   onSubmit(): void {
     if (this.checkoutform.valid) {
-      this.ordersService
-        .CheckOutSession(this.idCart, this.checkoutform.value)
-        .subscribe({
-          next: (res) => {
-            console.log(res);
-            if (res.status === 'success') {
-              // open(res.session.url, '_self');
-            }
-          },
-          error(err) {
-            console.log(err);
-          },
-        });
+      this.activatedRoute.paramMap.subscribe({
+        next: (res) => {
+          console.log(res);
+          this.idCart = res.get('idCart')!;
+          //////////////////////////////
+          this.ordersService
+            .CheckOutSession(res.get('idCart')!, this.checkoutform.value)
+            .subscribe({
+              next: (res) => {
+                console.log(res);
+                if (res.status === 'success') {
+                  open(res.session.url, '_self');
+                }
+              },
+              error(err) {
+                console.log(err);
+              },
+            });
+        },
+      });
 
       // this.ordersService
       //   .CreatCashOrders(this.idCart, this.checkoutform.value)
@@ -72,5 +82,10 @@ export class CheckoutComponent implements OnInit {
       //     },
       //   });
     }
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
   }
 }

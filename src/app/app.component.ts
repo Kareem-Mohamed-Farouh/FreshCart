@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { FooterComponent } from './Layouts/footer/footer.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, NgxSpinnerModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
