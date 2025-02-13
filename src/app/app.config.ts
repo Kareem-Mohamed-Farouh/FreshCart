@@ -23,6 +23,7 @@ import {
 } from '@angular/platform-browser/animations';
 import { settokenInterceptor } from './core/interceptor/settoken/settoken.interceptor';
 import { loadingInterceptor } from './core/interceptor/loading/loading.interceptor';
+import { handlEerrorInterceptor } from './core/interceptor/handlEerror/handl-eerror.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -35,7 +36,11 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideHttpClient(
       withFetch(),
-      withInterceptors([settokenInterceptor, loadingInterceptor])
+      withInterceptors([
+        settokenInterceptor,
+        loadingInterceptor,
+        handlEerrorInterceptor,
+      ])
     ),
     provideAnimations(),
 

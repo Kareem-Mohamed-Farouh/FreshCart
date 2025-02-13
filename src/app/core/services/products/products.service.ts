@@ -15,9 +15,6 @@ export class ProductsService {
   }
 
   getSpecificProduct(id: string): Observable<any> {
-    return this.httpClient.get(
-      `${environment.baseUrl}/api/v1/products/${id}`
-   
-    );
+    return this.httpClient.get(`${environment.baseUrl}/api/v1/products/${id}`);
   }
 }
