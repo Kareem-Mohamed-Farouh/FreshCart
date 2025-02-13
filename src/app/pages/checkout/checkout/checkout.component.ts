@@ -28,9 +28,10 @@ export class CheckoutComponent implements OnInit {
   // });
 
   idCart: string = '';
+
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((res) => {
-      console.log(res);
+      // console.log(res);
       this.idCart = res.get('idCart')!;
     });
   }
