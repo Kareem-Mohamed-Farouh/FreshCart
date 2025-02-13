@@ -1,3 +1,4 @@
+import { ForgetPassComponent } from './shared/components/forgetPass/forget-pass/forget-pass.component';
 import { Routes } from '@angular/router';
 import { AuthLayaoutComponent } from './Layouts/auth-layaout/auth-layaout.component';
 import { BlankLayoutComponent } from './Layouts/blank-layout/blank-layout.component';
@@ -25,6 +26,14 @@ export const routes: Routes = [
             (c) => c.RegisterComponent
           ),
         title: 'Register',
+      },
+      {
+        path: 'forget',
+        loadComponent: () =>
+          import(
+            './shared/components/forgetPass/forget-pass/forget-pass.component'
+          ).then((c) => c.ForgetPassComponent),
+        title: 'Forget Password',
       },
     ],
   },
@@ -56,6 +65,14 @@ export const routes: Routes = [
         title: 'Cart',
       },
       {
+        path: 'checkout/:idCart',
+        loadComponent: () =>
+          import('./pages/checkout/checkout/checkout.component').then(
+            (c) => c.CheckoutComponent
+          ),
+        title: 'checkout',
+      },
+      {
         path: 'categories',
         loadComponent: () =>
           import('./pages/categories/categories.component').then(
@@ -80,6 +97,24 @@ export const routes: Routes = [
           ),
         title: 'details',
       },
+      {
+        path: 'CategoryDetails/:detailsCatId',
+        loadComponent: () =>
+          import(
+            './pages/spicificCatDetails/spicific-cat-details/spicific-cat-details.component'
+          ).then((c) => c.SpicificCatDetailsComponent),
+        title: 'Category Details',
+      },
+
+      {
+        path: 'allorders',
+        loadComponent: () =>
+          import('./pages/all-order/all-order.component').then(
+            (c) => c.AllOrderComponent
+          ),
+        title: 'allOrders',
+      },
+
       { path: '**', component: NotfoundComponent, title: '404 Not Found' },
     ],
   },

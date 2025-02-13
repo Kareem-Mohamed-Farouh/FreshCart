@@ -1,0 +1,211 @@
+<h1 class="text-4xl mt-10 font-medium font-sans text-green-700 text-center">Forget Password </h1>
+<div class="w-[40%]  mx-auto my-5 p-12  rounded  bg-gray-100">
+
+
+    @if(step == 1){
+    @let emailControl= verifyEmail.get('email');
+
+    <form [formGroup]="verifyEmail" (ngSubmit)="onVerifyEmail()">
+
+        <div class="mb-2">
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter Email
+                :</label>
+            <input type="email" id="email" formControlName="email"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+
+
+            @if( emailControl?.errors && emailControl?.touched){
+            <div class="mt-1 flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Danger</span>
+                <div>
+                    <span class="font-medium">Messege Error :</span>
+                    <ul class="mt-1.5 list-disc list-inside">
+                        @if( emailControl?.getError('required')){
+                        <li>Email Is required </li>
+                        }
+                        @else if( emailControl?.getError('email')){
+                        <li>write a Correct format of Email </li>
+                        <li> User Email Name a gmail.com</li>
+
+                        }
+                    </ul>
+                </div>
+            </div>
+            }
+        </div>
+
+        <button type="submit" [disabled]="isLoading"
+            class="  mx-auto block mt-10   mb-5  btn-main capitalize hover:bg-green-800">verfiy your email
+            @if(isLoading){
+            <i class="ms-2 fas fa-spin fa-spinner"></i>}
+            @if(isNotValidemail){
+            <div class="w-full px-3 py-5 font-medium text-white mb-5 text-center  bg-red-600"> Account Already Exists
+            </div>}
+        </button>
+
+
+    </form>
+
+    }
+
+    @if(step == 2){
+    @let codeControl= verifyCode.get('resetCode');
+
+    <form action="" [formGroup]="verifyCode" (ngSubmit)="onVerifyCode()">
+
+        <div class="mb-2">
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter Your CODE Here
+                :</label>
+            <input type="email" id="email" formControlName="resetCode"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+
+
+            @if( codeControl?.errors && codeControl?.touched){
+            <div class="mt-1 flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Danger</span>
+                <div>
+                    <span class="font-medium">Messege Error :</span>
+                    <ul class="mt-1.5 list-disc list-inside">
+                        @if( codeControl?.getError('required')){
+                        <li>Code Is required </li>
+                        }
+                        @else if( codeControl?.getError('pattern')){
+                        <li> yor code must be 6 number write a Correct Code </li>
+
+
+                        }
+                    </ul>
+                </div>
+            </div>
+            }
+        </div>
+
+        <button type="submit" [disabled]="isLoading" class=" mx-auto block mt-10  btn-main  hover:bg-green-800">verfiy
+            your Code
+            @if(isLoading){
+            <i class="ms-2 fas fa-spin fa-spinner"></i>}
+        </button>
+
+    </form>
+
+
+    }
+
+
+    @if(step==3){
+
+    @let email= resetPassword.get('email');
+    @let newPasscontrol= resetPassword.get('newPassword');
+
+    <form action="" [formGroup]="resetPassword" (ngSubmit)="onResetPass()">
+
+
+
+
+
+
+
+
+
+
+
+        <div class="mb-2">
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email :</label>
+            <input readonly type="email" id="email" formControlName="email"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+
+
+            @if( email?.errors && email?.touched){
+            <div class="mt-1 flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Danger</span>
+                <div>
+                    <span class="font-medium">Messege Error :</span>
+                    <ul class="mt-1.5 list-disc list-inside">
+                        @if( email?.getError('required')){
+                        <li>Email Is required </li>
+                        }
+                        @else if( email?.getError('email')){
+                        <li>write a Correct format of Email </li>
+                        <li> User Email Name a gmail.com</li>
+
+                        }
+                    </ul>
+                </div>
+            </div>
+            }
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <div class="mb-2">
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white capitalize">enter
+                your new
+                password
+                :</label>
+            <input type="email" id="email" formControlName="newPassword"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+
+
+            @if( newPasscontrol?.errors && newPasscontrol?.touched){
+            <div class="mt-1 flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span class="sr-only">Danger</span>
+                <div>
+                    <span class="font-medium">Messege Error :</span>
+                    <ul class="mt-1.5 list-disc list-inside">
+                        @if( newPasscontrol?.getError('required')){
+                        <li>Code Is required </li>
+                        }
+                        @else if( newPasscontrol?.getError('pattern')){
+                        <li> yor code must be 6 number write a Correct Code </li>
+
+
+                        }
+                    </ul>
+                </div>
+            </div>
+            }
+        </div>
+
+        <button type="submit" [disabled]="isLoading" class=" mx-auto block mt-10  btn-main  hover:bg-green-800">Reset
+            PassWord
+
+            @if(isLoading){
+            <i class="ms-2 fas fa-spin fa-spinner"></i>}
+        </button>
+
+    </form>
+
+    }
+
+</div>

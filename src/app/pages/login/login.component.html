@@ -82,15 +82,21 @@
 
         </div>
 
+        <div class="flex flex-col  gap-2">
+            <button type="submit" [disabled]="isLoading" class="  my-3 btn-main  hover:bg-green-800">Login
+                @if(isLoading){
+                <i class="ms-2 fas fa-spin fa-spinner"></i>}
+            </button>
 
-        <button type="submit" [disabled]="isLoading" class="  my-3 btn-main  hover:bg-green-800">Login
-            @if(isLoading){
-            <i class="ms-2 fas fa-spin fa-spinner"></i>}
-        </button>
 
+            <p>
+                If you forget password <a routerLink="/forget" class="font-light text-blue-500 capitalize"> Forget
+                    Password </a>
+            </p>
+            <p class="mb-2 capitalize">If You not have account yet click to <a routerLink="/register"
+                    class=" cursor-pointer text-green-600">sign Up now?</a></p>
 
-        <p class="mb-2 capitalize">If You not have account yet click to <a routerLink="/register"
-                class=" cursor-pointer text-green-600">sign Up now?</a></p>
+        </div>
     </form>
 
 

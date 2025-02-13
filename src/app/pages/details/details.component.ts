@@ -16,7 +16,8 @@ export class DetailsComponent {
   private readonly productsService = inject(ProductsService);
   detailsId: string = '';
   d: number = 1;
-  detailData: IProducts = {} as IProducts;
+  // detailData: IProducts = {} as IProducts;
+  detailData: IProducts | null = null;
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -29,7 +30,6 @@ export class DetailsComponent {
         this.productsService.getSpecificProduct(this.detailsId).subscribe({
           next: (res) => {
             this.detailData = res.data;
-            this.d = Math.floor(this.detailData.ratingsAverage);
           },
 
           error: (err) => {

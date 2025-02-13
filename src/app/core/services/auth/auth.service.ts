@@ -45,4 +45,39 @@ export class AuthService {
 
     this.userData = null;
   }
+
+  forgetPassword(email: object): Observable<any> {
+    return this.httpClient.post(
+      `${environment.baseUrl}/api/v1/auth/forgotPasswords`,
+      email
+    );
+  }
+
+  verifyResetCode(code: object): Observable<any> {
+    return this.httpClient.post(
+      `${environment.baseUrl}/api/v1/auth/verifyResetCode`,
+      code
+    );
+  }
+
+  updateLoggedUserPassword(userData: object): Observable<any> {
+    return this.httpClient.put(
+      `${environment.baseUrl}/api/v1/auth/changeMyPassword`,
+      userData
+    );
+  }
+
+  resetPasswordd(userData: object): Observable<any> {
+    return this.httpClient.put(
+      `${environment.baseUrl}/api/v1/auth/resetPassword`,
+      userData
+    );
+  }
+
+  // updateLoggedUserData(userData: object): Observable<any> {
+  //   return this.httpClient.put(
+  //     `${environment.baseUrl} /api/v1/users/updateMe/`,
+  //     userData,headers: {[]},
+  //   );
+  // }
 }

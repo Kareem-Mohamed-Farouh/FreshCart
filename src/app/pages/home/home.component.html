@@ -1,5 +1,4 @@
 <section class="relative">
-
     <div>
         <app-home-slider></app-home-slider>
         <owl-carousel-o [options]="customOptions">
@@ -7,8 +6,10 @@
 
             @for (cat of categoryData; track $index) {
             <ng-template carouselSlide>
-                <img [src]="cat.image" class="h-[245px]" [alt]="cat.slug">
-                <p class="text-center pt-1 text-green-500"> {{cat.name}} </p>
+                <div [routerLink]="['/CategoryDetails',cat._id]" class="cursor-pointer    border">
+                    <img [src]="cat.image" class="h-[245px]" [alt]="cat.slug">
+                    <p class="text-center font-serif pt-1 text-green-500"> {{cat.name}} </p>
+                </div>
             </ng-template>
             }
         </owl-carousel-o>
@@ -16,31 +17,45 @@
 
 
 
-
-    <h1 class="text-4xl font-semibold capitalize py-9 text-center   font-serif"> welcome in Fresh Cart</h1>
-    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-    <div class="relative mb-3 w-1/2 ms-auto">
-        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                fill="none" viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-            </svg>
+    <div class="flex justify-center items-center  my-1">
+        <h1 class="text-4xl font-semibold capitalize py-3 text-center  text-green-800 font-serif"> Popular products
+        </h1>
+        <label for="default-search"
+            class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+        <div class="relative mb-3  w-1/2 ms-auto">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-4 h-4 text-green-500 dark:text-green-400" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                </svg>
+            </div>
+            <input type="search" [(ngModel)]="searchWord"
+                class="block w-full p-4 ps-10 text-sm text-green-900 border border-green-300 rounded-lg bg-green-50 focus:ring-green-500 focus:border-green-500 dark:bg-green-700 dark:border-green-600 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                placeholder="Search Brand..." />
         </div>
-        <input type="search" [(ngModel)]="searchWord"
-            class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-            placeholder="Search Brand..." />
     </div>
 
 
-
-    <div class=" grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 overflow-hidden gap-5">
-        @for (prod of products. slice(12) | search : searchWord; track prod._id) {
+    @if(products){
+    <div class=" grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 overflow-hidden gap-5">
+        @for (prod of products.slice(2) | search : searchWord ; track prod._id) {
         <div class="card overflow-hidden border border-green-300 rounded-md relative ">
             <div [routerLink]="['/details',prod._id]">
                 <div class="card-image ">
-                    <img class="card-img-top h-[250px] object-contain w-full " [src]="prod.imageCover"
-                        [alt]="prod.title" />
+
+
+                    <owl-carousel-o [options]="CardCustomOptions">
+                        @for (img of prod.images; track $index) {
+
+
+                        <ng-template carouselSlide>
+                            <img [src]="img" class="card-img-top  h-[250px] w-full" [alt]="img">
+
+                        </ng-template>
+                        }
+                    </owl-carousel-o>
+
 
                 </div>
                 <div class="card-body  px-4">
@@ -55,9 +70,10 @@
 
                 </div>
             </div>
-            <button class="py-2 bg-green-800 text-white block w-[90%] mx-auto rounded">Add To Cart</button>
+            <button (click)="addItemToCart(prod._id)"
+                class="py-2 bg-green-800 text-white block w-[90%] mx-auto rounded">Add To Cart</button>
         </div>
         }
 
-    </div>
+    </div>}
 </section>

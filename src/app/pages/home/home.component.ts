@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { ProductsService } from '../../core/services/products/products.service';
 
 import { IProducts } from '../../shared/interfaces/IProducts/iproducts';
@@ -10,6 +10,8 @@ import { HomeSliderComponent } from '../../shared/components/homeSlider/home-sli
 import { FormsModule, NgModel } from '@angular/forms';
 import { SearchPipe } from '../../shared/pipes/search/search.pipe';
 import { RouterLink } from '@angular/router';
+import { CartService } from '../../core/services/cart/cart.service';
+
 @Component({
   selector: 'app-home',
   imports: [
@@ -25,7 +27,10 @@ import { RouterLink } from '@angular/router';
 export class HomeComponent implements OnInit {
   private readonly productsService = inject(ProductsService);
   private readonly categoryService = inject(CategoryService);
+  private readonly cartService = inject(CartService);
   searchWord: string = '';
+  products!: IProducts[];
+
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -60,7 +65,29 @@ export class HomeComponent implements OnInit {
     // nav: true,
   };
 
-  products!: IProducts[];
+  CardCustomOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: false,
+    dots: true,
+    navSpeed: 1000,
+    autoplay: true,
+    autoplayHoverPause: true,
+    autoplayTimeout: 50,
+    autoplaySpeed: 800,
+    navText: [
+      '<i class="fa-solid fa-arrow-left"></i>',
+      '<i class="fa-solid fa-arrow-right"></i>',
+    ],
+    items: 1,
+    nav: false, // أو يمكن تفعيلها إذا أردت أزرار التنقل
+  };
+  ngOnInit(): void {
+    // this.getProductData();
+    this.getproductData();
+    this.getcategryData();
+  }
 
   getproductData() {
     this.productsService.getAllProducts().subscribe({
@@ -85,9 +112,12 @@ export class HomeComponent implements OnInit {
       },
     });
   }
-  ngOnInit(): void {
-    // this.getProductData();
-    this.getproductData();
-    this.getcategryData();
+
+  addItemToCart(productId: string) {
+    this.cartService.addProductToCart(productId).subscribe({
+      next: (res) => console.log(res),
+
+      error: (err) => console.log(err),
+    });
   }
 }
