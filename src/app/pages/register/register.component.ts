@@ -26,6 +26,7 @@ export class RegisterComponent {
 
   // ======== cntrol Form=======
   // [formGroup -- formControle]
+
   registerForm: FormGroup = new FormGroup(
     {
       name: new FormControl(null, [
