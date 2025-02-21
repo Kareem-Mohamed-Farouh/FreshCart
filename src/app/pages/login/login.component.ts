@@ -57,14 +57,12 @@ export class LoginComponent {
 
             // programing routing
             // console.log(res.token);
-          } else {
-            this.isLoading = true;
-            console.log(res.error);
-            this.isLoading = false;
           }
         },
         error: (err) => {
           console.log(err.error.message);
+          this.isLoading = false;
+          this.isload = true;
         },
       });
     }

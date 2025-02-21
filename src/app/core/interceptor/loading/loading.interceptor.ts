@@ -5,6 +5,7 @@ import { finalize } from 'rxjs';
 
 export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   const spinner = inject(NgxSpinnerService);
+  // if (!req.url.includes('wishlist')) {
   spinner.show();
 
   return next(req).pipe(
@@ -13,3 +14,5 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
     })
   );
 };
+// return next(req);
+// };

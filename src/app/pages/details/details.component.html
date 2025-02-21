@@ -2,18 +2,33 @@
 <div class=" p-4">
     <div class="xl:max-w-screen-xl lg:max-w-screen-lg max-w-xl mx-auto">
         <div class="grid items-start grid-cols-1 lg:grid-cols-3 gap-8 max-lg:gap-12 max-sm:gap-8">
-            <div class="w-(100%) me-auto">
-                <img [src]="detailData.imageCover" alt="Product" class=" " />
+            <div class="">
+
+                <owl-carousel-o [options]="customOptions">
+                    @for (img of detailData.images; track $index) {
+
+
+                    <ng-template carouselSlide>
+                        <img [src]="img" class="card-img-top  object-contain h-[350px] w-full" [alt]="img">
+
+                    </ng-template>
+                    }
+                </owl-carousel-o>
+
+
+                <!-- <img [src]="detailData.imageCover" alt="Product" class=" " /> -->
             </div>
             <div class="w-full lg:col-span-2">
                 <div>
-                    <h3 class="text-lg font-bold text-gray-800">{{detailData.title}}</h3>
-                    <div class="flex justify-between px-2">
-                        <h4 class="text-lg font-bold text-gray-600">{{detailData.category.name}}</h4>
+                    <h3 class="text-2xl font-bold dark:text-white text-gray-800">{{detailData.title}}</h3>
+                    <p class="text-gray-500 dark:text-gray-300 text-sm my-2">{{detailData.description}} </p>
+                    <div class="flex justify-between ">
+                        <h4 class="text-lg font-bold max-sm:text-sm  dark:text-gray-300 text-gray-600">
+                            Category: {{detailData.category.name}}</h4>
                         <div class="flex items-center space-x-1 mt-2">
 
 
-                            @for (item of detailData.images; track $index) {
+                            @for (item of [1,2,3,4,5].slice(0,detailData.ratingsAverage); track $index) {
 
                             <svg class="w-4 h-4 fill-yellow-400" viewBox="0 0 14 13" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -22,46 +37,42 @@
                             </svg>
 
                             }
-                            <p class="text-sm text-gray-800 !ml-3">{{detailData.ratingsAverage }}
+                            @if (detailData.ratingsAverage) {
+                            <span><i class="fa-solid fa-star-half text-yellow-500 "></i></span>
+                            }
+                            <p class=" dark:text-gray-300 text-sm text-gray-800 ">{{detailData.ratingsAverage }}
                                 ({{detailData.ratingsQuantity}})</p>
                         </div>
 
                     </div>
-                    <div class="flex items-center flex-wrap gap-4 mt-6">
-                        <h4 class="text-gray-800 text-2xl font-bold">{{ detailData.price | currency }}</h4>
-                        <p class="text-gray-500 text-lg"><span class="text-sm ml-1.5">{{detailData.description}}</span>
-                        </p>
+
+
+                    <h4 class="text-gray-800   dark:text-white  text-2xl font-bold">{{ detailData.price |
+                        currency }}
+
+                    </h4>
+
+
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-lg  font-bold ms-2 dark:text-white text-gray-600">
+                            Brand : {{detailData.brand.name}}</h4>
+                        <img [src]="detailData.brand.image" class="ms-2 h-[60px] rounded max-sm:w-[50%]  object-contain"
+                            [alt]="detailData.brand.name">
                     </div>
                 </div>
 
-                <hr class="my-6 border-gray-300" />
-
-                <div>
 
 
-                    <div class="mt-6">
-                        <h3 class="text-lg font-bold text-gray-800">Colors</h3>
-                        <div class="flex flex-wrap gap-4 mt-4">
-                            <button type="button"
-                                class="w-10 h-9 bg-gray-600 border border-transparent hover:border-green-600 text-gray-800 text-sm flex items-center justify-center shrink-0"></button>
-                            <button type="button"
-                                class="w-10 h-9 bg-black border border-green-600 hover:border-green-600 text-green-800 text-sm flex items-center justify-center shrink-0"></button>
-                            <button type="button"
-                                class="w-10 h-9 bg-gray-100 border border-transparent hover:border-green-600 text-gray-800 text-sm flex items-center justify-center shrink-0"></button>
-                            <button type="button"
-                                class="w-10 h-9 bg-blue-600 border border-transparent hover:border-green-600 text-gray-800 text-sm flex items-center justify-center shrink-0"></button>
-                        </div>
-                    </div>
-                </div>
+
 
                 <hr class="my-6 border-gray-300" />
 
                 <div class="mt-6 flex flex-wrap gap-4">
-                    <button type="button"
-                        class="px-4 py-3 w-[45%] border border-gray-300 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-semibold  ">Add
+                    <button type="button" (click)="addProductToWishlist(detailData._id)"
+                        class="px-4 py-3 w-[45%] border border-red-500 bg-red-600   duration-500 text-white  max-sm:text-sm font-semibold  ">Add
                         to wishlist</button>
-                    <button type="button"
-                        class="px-4 py-3 w-[45%] border border-green-600 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold  ">Add
+                    <button type="button" (click)="addItemToCart(detailData._id)"
+                        class="px-4 py-3 w-[45%] border border-green-600 bg-green-600 duration-500 hover:bg-green-700 text-white max-sm:text-sm font-semibold  ">Add
                         to cart</button>
 
                     <div class="flex flex-wrap text-center">
@@ -71,7 +82,7 @@
 
 
                         <img [src]="item" alt="Product1"
-                            class=" border m-1 max-sm:w-full  sm:w-1/2 md:w-2/12   cursor-pointer " />
+                            class=" border m-1   max-sm:w-1/4 sm:w-1/2 md:w-2/12   cursor-pointer " />
 
 
 
@@ -89,5 +100,50 @@
 
 
 
+</div>
+<h3
+    class="capitalize text-3xl my-3 p-2 text-green-500  hover:translate-x-2 duration-300 border-green-600 bg-gray-50  border-b-white border-l-white border-2  dark:bg-slate-900 inline-block border-t-2">
+    related
+    Product</h3>
+<div
+    class=" grid p-2 dark:bg-slate-800 dark:text-white sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 overflow-hidden gap-5">
+    @for (prod of productData; track prod._id) {
+    @if(prod.brand._id ===detailData.brand._id){
+    <div [routerLink]="['/details',prod._id]"
+        class="card  hover:rotate-2     hover:border-r-white  transition-all duration-300   dark:border-r-white border-2 overflow-hidden  border-green-400 rounded-md  ">
+        <div class="card-image text-center dark:bg-slate-800 dark:text-white">
+            <img [src]="prod.imageCover" class="h-[150px] w-full object-contain" alt="">
+        </div>
+        <div class="cursor-pointer">
+
+            <div class="card-body  px-2">
+                <h4 class="text-green-600 py-1 text-center text-sm">{{prod.category.name}}</h4>
+                <h3 class="card-title font-medium mb-1">{{prod.title.split(" ",2).join(" ")}}</h3>
+                <p class="card-text ">Brand: {{prod.brand.name}}</p>
+
+
+            </div>
+
+        </div>
+        <div class="flex justify-between mx-2  items-center ">
+            <span class="font-bold">{{ prod.price}} EGP </span>
+
+        </div>
+        <div class=" flex items-center justify-between mx-3 mb-3 relative ">
+            <div>
+                @for (star of [1,2,3,4,5].slice(0, prod.ratingsAverage); track $index) {
+                <i class=" fa-solid fa-star text-yellow-400"></i>
+                }
+                @if (prod.ratingsAverage % 1 !== 0) {
+                <span><i class="fa-solid fa-star-half text-yellow-400 "></i></span>
+                }
+                <span class="ms-1 text-gray-500">
+                    ({{prod.ratingsAverage}} )</span>
+            </div>
+        </div>
+
+    </div>
+    }
+    }
 </div>
 }

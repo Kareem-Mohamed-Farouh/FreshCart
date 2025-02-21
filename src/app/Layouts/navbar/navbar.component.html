@@ -1,8 +1,9 @@
 <nav [class.py-2]="isScroll"
-    class=" duration-500  fixed  bg-gray-100 dark:bg-gray-800  w-full z-50 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+    class=" duration-500  fixed  bg-gray-100 dark:bg-slate-900 w-full z-50 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
     <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto py-3 max-sm:px-4 sm:px-8 ">
-        <a href="" class="dark:bg-gray-300 dark:rounded-full  p-1 flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="/images/freshcart-logo.svg" class="h-8" alt="Flowbite Logo">
+        <a
+            class="max-sm:w-[40%]    dark:bg-gray-300 dark:rounded-full  p-1 flex items-center  space-x-3 rtl:space-x-reverse">
+            <img src="/images/freshcart-logo.svg" class=" h-8" alt="Flowbite Logo">
             <!-- <span class="self-center text-2xl font-semibold grayspace-nowrap dark:text-gray-50"></span> -->
         </a>
 
@@ -28,25 +29,21 @@
                         class="block transition-all duration-500 hover:bg-green-800 hover:text-white text-gray-900 rounded   px-3 py-2     dark:text-gray-50  dark:hover:bg-gray-700   ">Brands</a>
                 </li>
 
-                <div class="md:hidden  items-center  flex text-xl gap-5 me-4 ">
+                <div class="md:hidden   items-center  flex text-xl gap-5 me-4 ">
                     <a href=""><i class="dark:text-blue-400 text-blue-700  fa-brands fa-facebook"></i></a>
                     <a href=""><i class=" dark:text-blue-400 text-blue-700 fa-brands fa-linkedin"></i></a>
                     <a href=""><i class="dark:text-red-500  text-red-700 fa-brands fa-instagram"></i></a>
                     <a href=""><i class=" dark:text-white  text-black fa-brands fa-tiktok"></i></a>
                 </div>
             </ul>
+
+            <a role="button" (click)="authService.logoutUser()"
+                class="   lg:hidden bg-gray-500 px-3 text-white mas-sm:px-1 max-sm:py-1 py-2  m-2  rounded hover:bg-red-600   dark:text-white transition-all duration-300 hover:text-green-950   ">LogOut</a>
         </div>
 
         }
+
         <div class="ms-auto flex md:order-2 items-center space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <div class="max-lg:hidden    flex text-xl gap-5 me-4 ">
-                <a href=""><i class="dark:text-blue-400 text-blue-700  fa-brands fa-facebook"></i></a>
-                <a href=""><i class=" dark:text-blue-400 text-blue-700 fa-brands fa-linkedin"></i></a>
-                <a href=""><i class="dark:text-red-500  text-red-700 fa-brands fa-instagram"></i></a>
-                <a href=""><i class=" dark:text-white  text-black fa-brands fa-tiktok"></i></a>
-
-
-            </div>
 
             <div class="items-center flex mx-2 ">
 
@@ -60,18 +57,33 @@
                 </a>
                 }
                 @else {
-                <li class=" me-2 list-none">
-                    <a routerLink="/cart" routerLinkActive="text-green-800 "
-                        class="block transition-all duration-500  hover:text-green-600  text-gray-900 rounded  px-3 py-2   dark:text-gray-50  dark:hover:bg-gray-700  "><i
+                <li routerLink="/cart" routerLinkActive="   text-green-600 rounded  "
+                    class=" group cursor-pointer items-center align-middle text-center list-none">
+                    <a
+                        class="block transition-all duration-500  py-1 group-hover:text-green-600   text-gray-900 rounded  px-3    dark:text-gray-50    "><i
                             class=" text-2xl fas fa-cart-shopping"></i></a>
+                    <span class=" max-md:hidden  font-serif">Cart</span>
                 </li>
+
+                <li routerLink="/wishlist" routerLinkActive="  text-red-600 rounded  "
+                    class="  group cursor-pointer mx-1    py-1 duration-500 hover:text-red-600  list-none">
+                    <a
+                        class="relative  block transition-all duration-500   py-1 text-gray-900 rounded  px-3    dark:text-gray-50    "><i
+                            class=" text-2xl  text-red-700  fas fa-heart   group-hover:text-red-500 duration-500"></i>
+                        <span
+                            class="absolute top-[50%] start-[50%]  text-red-600 font-serif  rounded-full">{{wishlistService.wishCount.getValue()}}</span></a>
+
+                    <span class=" max-md:hidden  font-serif">wishlist </span>
+                </li>
+
                 <a role="button" (click)="authService.logoutUser()"
-                    class="bg-gray-500 px-3 text-white mas-sm:px-1 max-sm:py-1 py-2  m-2  rounded hover:bg-red-600   dark:text-white transition-all duration-300 hover:text-green-950   ">LogOut</a>
+                    class=" max-lg:hidden bg-gray-500 px-3 text-white mas-sm:px-1 max-sm:py-1 py-2  m-2  rounded hover:bg-red-600   dark:text-white transition-all duration-300 hover:text-green-950   ">LogOut</a>
                 }
             </div>
 
 
         </div>
+        @if(isLogin()){
         <button data-collapse-toggle="navbar-sticky" type="button"
             class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
             aria-controls="navbar-sticky" aria-expanded="false">
@@ -81,6 +93,7 @@
                     d="M1 1h15M1 7h15M1 13h15" />
             </svg>
         </button>
+        }
 
     </div>
 

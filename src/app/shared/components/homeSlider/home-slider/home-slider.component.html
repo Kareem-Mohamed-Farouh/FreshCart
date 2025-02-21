@@ -1,17 +1,27 @@
-<div>
-    <owl-carousel-o [options]="customOptions">
-        @for (img of slides; track $index) {
-        <ng-template carouselSlide>
+<div class="flex mb-3 justify-center flex-wrap items-stretch">
+    <div class=" max-sm:w-[100%]  h-[100%] md:w-[79%] ">
+        <owl-carousel-o [options]="customOptions">
+            @for (img of slides; track $index) {
+            <ng-template class="" carouselSlide>
 
-            <div class="w-70%  md:grid-cols-[70%_minmax(0,1fr)]">
-                <img [src]="img" [alt]="img">
-            </div>
-            <div>
-                <img src="/public/" alt="">
-                <img src="" alt="">
-            </div>
-        </ng-template>
-        }
+                <!-- <div class="   md:grid-cols-[70%_minmax(0,1fr)]"> -->
+                <img [src]="img" class="w-full max-sm:h-[150px] h-[300px]" [alt]="img">
+                <!-- </div> -->
 
-    </owl-carousel-o>
+            </ng-template>
+
+            }
+
+        </owl-carousel-o>
+    </div>
+    <div class=" max-sm:flex   max-sm:gap-3  md:w-[20%]">
+        <div>
+            <img src="/images/slider-image-2.jpeg" class="h-[150px] w-full " alt="">
+        </div>
+        <div>
+
+            <img src="/images/slider-image-1.jpeg" class="h-[150px] w-full" alt="">
+        </div>
+
+    </div>
 </div>

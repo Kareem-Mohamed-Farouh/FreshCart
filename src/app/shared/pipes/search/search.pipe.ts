@@ -7,9 +7,7 @@ import { IProducts } from '../../interfaces/IProducts/iproducts';
 export class SearchPipe implements PipeTransform {
   transform(products: IProducts[], searchWord: string): IProducts[] {
     return products.filter((prod) =>
-      prod.brand.name
-        .toLocaleLowerCase()
-        .includes(searchWord.toLocaleLowerCase())
+      prod.title.toLocaleLowerCase().includes(searchWord.toLocaleLowerCase())
     );
   }
 }

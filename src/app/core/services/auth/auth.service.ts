@@ -41,7 +41,7 @@ export class AuthService {
     localStorage.removeItem('token');
 
     // navigate to log in
-    this.router.navigate(['/login']);
+    this.router.navigate(['/homelogin']);
 
     this.userData = null;
   }
@@ -73,6 +73,4 @@ export class AuthService {
       userData
     );
   }
-
-
 }

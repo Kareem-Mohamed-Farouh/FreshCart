@@ -1,10 +1,11 @@
-<section class="border relative my-10  px-10 rounded-md max-sm:w-11/12 sm:w-8/12 bg-gray-50 shadow-sm  mx-auto">
+<section
+    class="border relative my-10  px-10  border-green-500 rounded-md max-sm:w-11/12 sm:w-8/12 dark:bg-gray-900 bg-gray-100 shadow-sm  shadow-green-600 mx-auto">
 
     <div [class.hidden]="isload" class="  w-[100%] h-[100%] flex   justify-center items-center   z-20">
         <span class="loader"></span>
     </div>
 
-    <h1 class="my-2 text-3xl text-center font-sans  text-green-800"><i>Login NOW</i></h1>
+    <h1 class="my-2 text-3xl text-center font-sans  dark:text-green-500 text-green-800"><i>Login NOW</i></h1>
     <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
 
 
@@ -13,7 +14,7 @@
         <div class="mb-2">
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email :</label>
             <input type="email" id="email" formControlName="email"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-600 dark:text-gray-900 dark:focus:ring-green-500 dark:focus:border-green-500">
 
 
             @if( emailControl?.errors && emailControl?.touched){
@@ -46,8 +47,8 @@
         <div class="mb-2">
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password
                 :</label>
-            <input type="email" id="password" formControlName="password"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+            <input type="password" id="password" formControlName="password"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-green-500 dark:focus:border-green-500">
 
 
             @let passwordControl= loginForm.get('password');
@@ -90,11 +91,11 @@
 
 
             <p>
-                If you forget password <a routerLink="/forget" class="font-light text-blue-500 capitalize"> Forget
-                    Password </a>
+                <a routerLink="/forget" class="font-light text-blue-600 capitalize"> Forget
+                    Password !? </a>
             </p>
             <p class="mb-2 capitalize">If You not have account yet click to <a routerLink="/register"
-                    class=" cursor-pointer text-green-600">sign Up now?</a></p>
+                    class=" cursor-pointer text-green-500">sign Up now?</a></p>
 
         </div>
     </form>

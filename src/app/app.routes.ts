@@ -7,12 +7,20 @@ import { authguardGuard } from './core/guards/authguard/authguard.guard';
 import { logedinGuard } from './core/guards/logedin/logedin.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'homelogin', pathMatch: 'full' },
   {
     path: '',
     component: AuthLayaoutComponent,
     canActivate: [logedinGuard],
     children: [
+      {
+        path: 'homelogin',
+        loadComponent: () =>
+          import('./pages/homelogin/homelogin/homelogin.component').then(
+            (c) => c.HomeloginComponent
+          ),
+        title: 'homelogin',
+      },
       {
         path: 'login',
         loadComponent: () =>
@@ -79,6 +87,15 @@ export const routes: Routes = [
             (c) => c.CategoriesComponent
           ),
         title: 'Categories',
+      },
+
+      {
+        path: 'wishlist',
+        loadComponent: () =>
+          import('./pages/wishlist/wishlist/wishlist.component').then(
+            (c) => c.WishlistComponent
+          ),
+        title: 'WishList',
       },
       {
         path: 'products',

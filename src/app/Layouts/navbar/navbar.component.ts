@@ -1,6 +1,16 @@
 import { AuthService } from './../../core/services/auth/auth.service';
-import { Component, HostListener, inject, input } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  HostListener,
+  inject,
+  input,
+  OnChanges,
+  OnInit,
+} from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { WishlistService } from '../../core/services/wishlist/wishlist.service';
+import { IWhishlist } from '../../shared/interfaces/whishlist/whishlist';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +21,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class NavbarComponent {
   isLogin = input<boolean>(false);
   isScroll: Boolean = false;
+
+  public wishlistService = inject(WishlistService);
 
   @HostListener('window:scroll') onScroll() {
     if (scrollY > 0) {

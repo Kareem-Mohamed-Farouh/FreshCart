@@ -1,0 +1,99 @@
+@for( item of wishlistData ;track $index){
+<div class=" p-5 border-b-2 dark:border-green-600 dark:bg-gray-900 mb- dark:text-white border-black">
+    <div class="xl:max-w-screen-xl lg:max-w-screen-lg max-w-xl mx-auto">
+        <div class="grid  grid-cols-1 lg:grid-cols-3 gap-4  max-sm:gap-3">
+            <div class="  rounded overflow-hidden  ">
+
+
+
+
+
+
+                <owl-carousel-o [options]="customOptions">
+                    @for (iteme of item.images; track $index) {
+                    <ng-template carouselSlide>
+                        <img [src]="['https://ecommerce.routemisr.com/Route-Academy-products/'+iteme]" alt="Product"
+                            class="   h-[250px] object-contain  rounded  cursor-pointer " />
+                    </ng-template>
+                    }
+                </owl-carousel-o>
+
+
+
+
+
+            </div>
+            <div class="w-full lg:col-span-2  ">
+                <div class="">
+                    <h3 class="text-lg font-bold  dark:text-green-500 text-gray-800">{{item.title}}</h3>
+                    <p class="text-gray-500 text-sm ">{{item.description}}
+                    </p>
+
+                    <div class="flex justify-between items-start mt-1  ">
+                        <h4 class="md:text-lg font-bold dark:text-white text-gray-600">Category : {{item.category.name}}
+                        </h4>
+                        <div class="flex items-center  space-x-1 ">
+
+
+                            @for (item of [1,2,3,4,5].slice(0,item.ratingsAverage) ; track $index) {
+
+                            <svg class="w-4 h-4 fill-yellow-400" viewBox="0 0 14 13" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+                            </svg>
+
+                            }
+                            <p class="text-sm  dark:text-gray-200 text-gray-800 !ml-3">({{item.ratingsAverage }})
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="flex justify-between items-center">
+
+
+                        <div class="flex my-1 items-center">
+                            <span class=" md:text-lg font-bold dark:text-white  text-gray-600"> Brand :</span>
+                            <img [src]="item.brand.image" class="w-[50%]  dark:w-[25%]  rounded-lg  object-contain"
+                                alt="item.brand.name">
+                        </div>
+                        <h4 class="text-gray-800  dark:text-green-500 md:text-xl font-bold"> Price : {{
+                            item.price | currency }}<del class=" ms-1 text-gray-400">{{ item.priceAfterDiscount|
+                                currency
+                                }}</del>
+                        </h4>
+                    </div>
+                </div>
+
+
+
+
+
+                <hr class=" border-gray-300" />
+
+                <div class="mt-3 flex flex-wrap gap-4 justify-center ">
+                    <button (click)=" removProductFromWishlist(item._id) " type="button"
+                        class="md:px-4 md:py-3 capitalize w-[45%] border border-red-300 bg-red-700 hover:bg-red-600 text-white duration-500 text-sm font-semibold  ">
+                        remove from wishlist</button>
+                    <button (click)="addItemToCart(item._id)" type="button"
+                        class="md:px-4 capitalize md:py-3 w-[45%] border border-green-600 bg-green-600 duration-500 hover:bg-green-700 text-white text-sm font-semibold  ">Add
+                        to cart</button>
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+</div>
+}

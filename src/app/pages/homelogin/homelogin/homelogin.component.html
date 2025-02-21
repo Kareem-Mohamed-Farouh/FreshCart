@@ -49,7 +49,7 @@
     @if(products){
     <div
         class=" grid  dark:bg-slate-800 dark:text-white sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 overflow-hidden gap-5">
-        @for (prod of products.slice(2) | search : searchWord ; track prod._id) {
+        @for (prod of products.slice(8) | search : searchWord ; track prod._id) {
         <div class="card  overflow-hidden border border-green-400 rounded-md  ">
             <div class="card-image dark:bg-slate-800 dark:text-white">
 
@@ -88,25 +88,19 @@
 
             </div>
             <div class=" flex items-center justify-between mx-3 mb-3 relative ">
-                <i (click)="addProductToWishList(prod._id) "
-                    class=" absolute top-0 end-3 z-20  cursor-pointer text-lg  text-red-600  fa-regular fa-heart"></i>
-                @if(wishData !== null){
-                @for (data of wishData; track $index) {
 
+                @for (data of wishData; track $index) {
                 @if( data._id == prod._id ){
 
-                <i (click)="removProductFromWishlist(prod._id) "
+                <i (click)="getloginMessage('Add product in wishlist ') "
                     class=" absolute top-0 end-3 z-[21]  cursor-pointer text-lg  text-red-600  fa-solid fa-heart"></i>
                 }
 
                 @if(data._id !== prod._id){
-                <i (click)="addProductToWishList(prod._id) "
+                <i (click)="getloginMessage('Add product in wishlist ') "
                     class=" absolute top-0 end-3 z-20  cursor-pointer text-lg  text-red-600  fa-regular fa-heart"></i>
                 }
-
                 }
-                }
-
 
 
                 <!-- 
@@ -127,7 +121,7 @@
                         ({{prod.ratingsAverage}} )</span>
                 </div>
             </div>
-            <button (click)="addItemToCart(prod._id)"
+            <button (click)="getloginMessage('Add product in cart ') "
                 class="py-2 bg-green-800 text-white block w-[90%] mx-auto rounded">Add
                 To Cart</button>
         </div>

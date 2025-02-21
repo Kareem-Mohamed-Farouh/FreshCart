@@ -12,6 +12,7 @@ export interface IProducts {
   imageCover: string;
   category: ICategory;
   brand: ICategory;
+
   ratingsAverage: number;
   createdAt: string;
   updatedAt: string;
@@ -51,7 +52,7 @@ interface Subcategory {
 //   createdAt: string;
 //   updatedAt: string;
 //   __v: number;
-//   reviews: any[];
+//   {{detailData.}}
 //   id: string;
 // }
 
