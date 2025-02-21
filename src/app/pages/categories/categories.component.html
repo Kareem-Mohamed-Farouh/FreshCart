@@ -1,25 +1,29 @@
 @if(categoryData && productData){
 
 <section class="">
-    <h1 class="text-4xl text-center text-green-600 font-medium">Our Categories</h1>
-    <div class=" flex flex-wrap ">
+    <h1 class="text-4xl text-center my-3 text-green-500 font-medium">Our Categories</h1>
+    <div class="  grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4  ">
+        @for (cat of categoryData; track $index) {
 
-        <div class="  flex-wrap flex overflow-x-hidden   justify-center my-3  ">
-            @for (cat of categoryData; track $index) {
+        <div class="flex justify-between   items-center rounded  bg-gray-300 m-1 p-2 hover:translate-x-2 duration-500 ">
+            <img [src]="cat.image" class="w-[30%] h-[50px] rounded  object-contain" alt="">
 
-            <div
-                class="flex justify-between w-1/6  items-center rounded  bg-gray-300 m-1 p-2 hover:translate-x-2 duration-500 ">
-                <img [src]="cat.image" class="w-[30%] h-[50px] rounded  object-contain" alt="">
-                <h2 class=""> {{cat.name}} </h2>
-                <button (click)="getspecificCategory(cat._id)  " class="px-3 py-2 bg-green-500  rounded ">click</button>
-
-            </div>
-            }
-
+            <button (click)="getspecificCategory(cat._id)  "
+                class="w-[70%] px-3 py-2 bg-green-500  rounded ">{{cat.name}}</button>
 
         </div>
+        }
+
+
+    </div>
+    @if(clickd && productData){
+    <div class=" flex flex-wrap ">
+        <h1
+            class="text-4xl text-center mx-auto my-2 border-y-4 border-green-500 inline py-3 text-green-500 font-medium">
+            ALL
+            Categories product</h1>
         <div class="   flex flex-wrap  gap-2 ">
-            <h1 class="text-4xl text-center w-full text-green-600 font-medium">ALL Categories product</h1>
+
             @for (prod of productData ; track prod._id) {
             <div
                 class="w-[24%] card cursor-pointer mx-auto my-3 group overflow-hidden border border-green-300 rounded-md relative ">
@@ -32,25 +36,13 @@
                         <h4 class="text-green-600 py-1 text-center text-sm">{{prod.category.name}}</h4>
                         <h3 class="card-title font-medium mb-1">{{prod.title.split(" ",2).join(" ")}}</h3>
                         <p class="card-text ">Brand: {{prod.brand.name}}</p>
-
-
                     </div>
-
                 </div>
                 <div class="flex justify-between mx-2  items-center ">
                     <span class="font-medium ">{{ prod.price}} EGP </span>
-
-
-
-
-
-
+                    <span class="font-medium text-gray-500 ">Sold :({{ prod.sold}}) </span>
                 </div>
                 <div class=" flex items-center justify-between mx-3 mb-1">
-                    <!-- <i #el appChangerheart (click)="(addProductToWishList(prod._id) )" -->
-                    <!-- class="cursor-pointer text-red-600   fa-regular fa-heart"></i> -->
-
-
                     <div>
                         @for (star of [1,2,3,4,5].slice(0, prod.ratingsAverage); track $index) {
                         <i class=" fa-solid fa-star text-yellow-400"></i>
@@ -63,55 +55,82 @@
                             ({{prod.ratingsAverage}} )</span>
                     </div>
                 </div>
+                @if($index %2 ==0 ){
                 <button
-                    class=" translate-y-[100%] group-hover:translate-y-0 duration-700 opacity-0 group-hover:opacity-100 transition-all  py-2 bg-green-800 text-white block w-[90%] mx-auto rounded">Add
+                    class=" translate-y-[100%] group-hover:translate-y-0 duration-700 opacity-0 group-hover:opacity-100 transition-all  py-2 bg-green-700 text-white block w-[90%] mx-auto rounded">Add
                     To Cart</button>
+                }@else{
+                <button
+                    class=" translate-y-[100%] group-hover:translate-y-0 duration-700 opacity-0 group-hover:opacity-100 transition-all  py-2 bg-orange-500 text-white block w-[90%] mx-auto rounded">Add
+                    To Cart</button>
+                }
             </div>
             }
 
 
-            @for (prod of productData ; track prod._id) {
-            @if( prod.category._id === spicCategoryData._id){
-            <div class="w-[24%] card group overflow-hidden border border-green-300 rounded-md relative ">
-                <div class="card-image ">
-                    <img [src]=" prod.imageCover" class="card-img-top  h-[250px] w-full object-contain"
-                        [alt]="prod.title">
-                </div>
-                <div [routerLink]="['/details',prod._id]">
-                    <div class="card-body  px-2">
-                        <h4 class="text-green-600 py-1 text-center text-sm">{{prod.category.name}}</h4>
-                        <h3 class="card-title font-medium mb-1">{{prod.title.split(" ",2).join(" ")}}</h3>
-                        <p class="card-text ">Brand: {{prod.brand.name}}</p>
-                    </div>
-                </div>
-                <div class="flex justify-between mx-2  items-center ">
-                    <span class="font-medium ">{{ prod.price}} EGP </span>
-                </div>
-                <div class=" flex items-center justify-between mx-3 mb-1">
-                    <!-- <i #el appChangerheart (click)="(addProductToWishList(prod._id) )" -->
-                    <!-- class="cursor-pointer text-red-600   fa-regular fa-heart"></i> -->
-                    <div>
-                        @for (star of [1,2,3,4,5].slice(0, prod.ratingsAverage); track $index) {
-                        <i class=" fa-solid fa-star text-yellow-400"></i>
-                        }
-                        @if (prod.ratingsAverage % 1 !== 0) {
-                        <span><i class="fa-solid fa-star-half text-yellow-500 "></i></span>
-                        }
-                        <span class="ms-1 text-gray-500">
-                            ({{prod.ratingsAverage}} )</span>
-                    </div>
-                </div>
-                <button
-                    class=" translate-y-[100%] group-hover:translate-y-0 duration-700 opacity-0 group-hover:opacity-100 transition-all  py-2 bg-green-800 text-white block w-[90%] mx-auto rounded">Add
-                    To Cart</button>
-            </div>
-            }
-            }
+
 
 
 
 
         </div>
+
     </div>
 
+    }
+
+
+
+
+    @if(!clickd){
+    <h4 class="text-2xl text-center text-green-400 py-2 px-4 my-4 bg-white border-y-2 border-green-500">
+        {{spicCategoryData.name}}
+
+    </h4>
+    }
+
+    <div class=" w-full gap-5 grid max-sm:grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        @for (prod of productData ; track prod._id) {
+        @if( prod.category._id === spicCategoryData._id){
+        <div class="cursor-pointer   card group overflow-hidden border border-green-300 rounded-md relative ">
+            <div [routerLink]="['/details',prod._id]" class=" card-image ">
+                <img [src]=" prod.imageCover" class="card-img-top  h-[250px] w-full object-contain" [alt]="prod.title">
+            </div>
+            <div [routerLink]="['/details',prod._id]">
+                <div class="card-body  px-2">
+                    <h4 class="text-green-600 py-1 text-center text-sm">{{prod.category.name}}</h4>
+                    <h3 class="card-title font-medium mb-1">{{prod.title.split(" ",2).join(" ")}}</h3>
+                    <p class="card-text ">Brand: {{prod.brand.name}}</p>
+                </div>
+            </div>
+            <div class="flex justify-between mx-2  items-center ">
+                <span class="font-medium ">{{ prod.price}} EGP </span>
+            </div>
+            <div class=" flex items-center justify-between mx-3 mb-1">
+
+                <div>
+                    @for (star of [1,2,3,4,5].slice(0, prod.ratingsAverage); track $index) {
+                    <i class=" fa-solid fa-star text-yellow-400"></i>
+                    }
+                    @if (prod.ratingsAverage % 1 !== 0) {
+                    <span><i class="fa-solid fa-star-half text-yellow-500 "></i></span>
+                    }
+                    <span class="ms-1 text-gray-500">
+                        ({{prod.ratingsAverage}} )</span>
+                </div>
+            </div>
+            @if($index %2 ==0 ){
+            <button
+                class=" translate-y-[100%] group-hover:translate-y-0 duration-700 opacity-0 group-hover:opacity-100 transition-all  py-2 bg-green-700 text-white block w-[90%] mx-auto rounded">Add
+                To Cart</button>
+            }@else{
+            <button
+                class=" translate-y-[100%] group-hover:translate-y-0 duration-700 opacity-0 group-hover:opacity-100 transition-all  py-2 bg-blue-700 text-white block w-[90%] mx-auto rounded">Add
+                To Cart</button>
+            }
+
+        </div>
+        }
+        }
+    </div>
 </section>}

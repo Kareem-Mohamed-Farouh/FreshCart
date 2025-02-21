@@ -5,5 +5,5 @@
 export enum environment {
   baseUrl = 'https://ecommerce.routemisr.com',
 
-  host = 'http://localhost:4200',
+  host = 'http://localhost:4200/#/',
 }

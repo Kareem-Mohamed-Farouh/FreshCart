@@ -19,10 +19,11 @@ export class CategoriesComponent implements OnInit {
   categoryData!: ICategory[];
   productData!: IProducts[];
   spicCategoryData!: ICategory;
+  clickd: boolean = true;
 
   ngOnInit(): void {
-    this.getCategory();
     this.getallproduct();
+    this.getCategory();
   }
 
   getCategory() {
@@ -42,12 +43,13 @@ export class CategoriesComponent implements OnInit {
       },
     });
   }
-
   getspecificCategory(catId: string) {
     this.categoryService.getSpecificCategories(catId).subscribe({
       next: (res) => {
         console.log(res.data);
+
         this.spicCategoryData = res.data;
+        this.clickd = false;
       },
     });
   }

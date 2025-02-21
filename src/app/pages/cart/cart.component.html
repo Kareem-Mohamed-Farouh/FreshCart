@@ -84,8 +84,9 @@
             </table>
         </div> -->
     <div class="products-in-cart   shadow  pb-3 px-2   text-white bg-blue-50">
-        <h1 class=" text-center pt-6 text-4xl text-green-600  font-medium">Shop Cart</h1>
-        <h3 class=" text-2xl text-center my-2 font-medium text-green-600"><span class="text-gray-900">Total Card Price
+        <h1 class=" font-serif text-center pt-6 text-4xl text-green-600  font-bold">Shop Cart</h1>
+        <h3 class=" text-2xl text-center my-2 font-semibold  text-red-700"><span class="text-gray-900">Total
+                Card Price
                 :</span>{{cartData.totalCartPrice
             |currency:"GBP"}}</h3>
 
@@ -100,16 +101,19 @@
         @for (prod of cartData.products; track $index) {
         <div class="grid   mb-1 border-b-[1px]    max-sm:md:grid-cols-1   gap-2 md:grid-cols-[10%_minmax(0,1fr)] ">
             <div>
-                <img [src]="prod.product.imageCover" class="mx-auto h-[120px]   w-full sm:object-contain max-sm:w-1/2 "
-                    [alt]="prod.product.title">
+                <img [src]="prod.product.imageCover"
+                    class="mx-auto md:h-[120px]   w-full sm:object-contain max-sm:w-1/2 " [alt]="prod.product.title">
             </div>
             <div class=" flex justify-between flex-wrap max-sm:flex-col items-center">
                 <div class="max-sm:text-center  my-2">
                     <h3 class="font-medium text-gray-900"> {{prod.product.title}}</h3>
                     <span class="text-lg  text-green-700"> price : {{prod.price |currency :'GBP'}} </span>
+                    <span class="block text-lg  text-red-700 font-serif"> Total price : {{prod.count *prod.price
+                        |currency
+                        :'GBP'}} </span>
                 </div>
                 <div class="items-center  flex max-sm:flex-col  gap-2  mb-2 ">
-                    <div class="mx-3 items-center gap-2   flex ">
+                    <div class="mx-3  md:text-xl items-center gap-2   flex ">
                         <button (click)="updateCartProductQuantity(prod.product._id,prod.count+1)"> <i
                                 class=" text-2xl text-green-700 fa fa-plus-square"></i> </button>
                         <span class="text-black"> {{prod.count}} </span>
