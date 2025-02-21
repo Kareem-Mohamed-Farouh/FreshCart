@@ -12,7 +12,7 @@
 
             @for (cat of categoryData; track $index) {
             <ng-template carouselSlide>
-                <div [routerLink]="['/CategoryDetails',cat._id]" class="cursor-pointer    border">
+                <div (click)="getloginMessage('to See Categories product ') " class="cursor-pointer    border">
                     <img [src]="cat.image" class="h-[245px]" [alt]="cat.slug">
                     <p class="text-center font-serif pt-1 text-green-500"> {{cat.name}} </p>
                 </div>
@@ -67,7 +67,7 @@
 
 
             </div>
-            <div class="cursor-pointer" [routerLink]="['/details',prod._id]">
+            <div class="cursor-pointer" (click)="getloginMessage('Add See  Product in Details  ') ">
 
                 <div class="card-body  px-2">
                     <h4 class="text-green-600 py-1 text-center text-sm">{{prod.category.name}}</h4>
