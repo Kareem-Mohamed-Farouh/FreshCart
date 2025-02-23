@@ -1,6 +1,6 @@
 @if(cartData){
-<section class="mt-5   ">
-    <!-- 
+<section class="mt-5">
+  <!-- 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -83,58 +83,97 @@
     
             </table>
         </div> -->
-    <div class="products-in-cart   shadow  pb-3 px-2   text-white bg-blue-50">
-        <h1 class=" font-serif text-center pt-6 text-4xl text-green-600  font-bold">Shop Cart</h1>
-        <h3 class=" text-2xl text-center my-2 font-semibold  text-red-700"><span class="text-gray-900">Total
-                Card Price
-                :</span>{{cartData.totalCartPrice
-            |currency:"GBP"}}</h3>
-
-        <div class="flex justify-center">
-            <button
-                class="  btn-main capitalize my-4 max-sm:w-[60%]  md:w-[30%] block  hover:bg-green-700 duration-500 "
-                [routerLink]="['/checkout',cartData._id]">
-                CheckOut
-            </button>
-
-        </div>
-        @for (prod of cartData.products; track $index) {
-        <div class="grid   mb-1 border-b-[1px]    max-sm:md:grid-cols-1   gap-2 md:grid-cols-[10%_minmax(0,1fr)] ">
-            <div>
-                <img [src]="prod.product.imageCover"
-                    class="mx-auto md:h-[120px]   w-full sm:object-contain max-sm:w-1/2 " [alt]="prod.product.title">
-            </div>
-            <div class=" flex justify-between flex-wrap max-sm:flex-col items-center">
-                <div class="max-sm:text-center  my-2">
-                    <h3 class="font-medium text-gray-900"> {{prod.product.title}}</h3>
-                    <span class="text-lg  text-green-700"> price : {{prod.price |currency :'GBP'}} </span>
-                    <span class="block text-lg  text-red-700 font-serif"> Total price : {{prod.count *prod.price
-                        |currency
-                        :'GBP'}} </span>
-                </div>
-                <div class="items-center  flex max-sm:flex-col  gap-2  mb-2 ">
-                    <div class="mx-3  md:text-xl items-center gap-2   flex ">
-                        <button (click)="updateCartProductQuantity(prod.product._id,prod.count+1)"> <i
-                                class=" text-2xl text-green-700 fa fa-plus-square"></i> </button>
-                        <span class="text-black"> {{prod.count}} </span>
-                        <button (click)="updateCartProductQuantity(prod.product._id,prod.count-1)"> <i
-                                class=" text-2xl text-green-700 fa fa-minus-square"></i> </button>
-                    </div>
-                    <button (click)="removeProduct(prod.product._id)"
-                        class="  block border mx-2 px-3 py-2 hover:bg-red-500 duration-500 bg-red-600 rounded text-white">
-                        <i class="fas fa  fa-trash-can"></i>
-                        Remove</button>
-                </div>
-            </div>
-        </div>
-        }
-
-
-        <button
-            class="w-[30%]  capitalize my-4  px-3 py-3 mx-auto block   hover:text-white font-medium hover:bg-red-800 rounded  bg-red-600 text-gray-800 bg-opacity-90 border-b-2 duration-500 "
-            (click)="deleteCart()">
-            clear cart
-        </button>
+  <div class="products-in-cart shadow pb-3 px-2 text-white bg-blue-50">
+    <h1 class="font-serif text-center pt-6 text-4xl text-green-600 font-bold">
+      Shop Cart
+    </h1>
+    <h3 class="text-2xl text-center my-2 font-semibold text-red-700">
+      <span class="text-gray-900">Total Card Price :</span
+      >{{ cartData.totalCartPrice | currency : "GBP" }}
+    </h3>
+    @if ( cartData.totalCartPrice !==0){
+    <div class="flex justify-center">
+      <button
+        class="btn-main capitalize my-4 max-sm:w-[60%] md:w-[30%] block hover:bg-green-700 duration-500"
+        [routerLink]="['/checkout', cartData._id]"
+      >
+        CheckOut
+      </button>
     </div>
+    @for (prod of cartData.products; track $index) {
+    <div
+      class="grid mb-1 border-b-[1px] max-sm:md:grid-cols-1 gap-2 md:grid-cols-[10%_minmax(0,1fr)]"
+    >
+      <div>
+        <img
+          [src]="prod.product.imageCover"
+          class="mx-auto md:h-[120px] w-full sm:object-contain max-sm:w-1/2"
+          [alt]="prod.product.title"
+        />
+      </div>
+      <div class="flex justify-between flex-wrap max-sm:flex-col items-center">
+        <div class="max-sm:text-center my-2">
+          <h3 class="font-medium text-gray-900">{{ prod.product.title }}</h3>
+          <span class="text-lg text-green-700">
+            price : {{ prod.price | currency : "GBP" }}
+          </span>
+          <span class="block text-lg text-red-700 font-serif">
+            Total price : {{ prod.count * prod.price | currency : "GBP" }}
+          </span>
+        </div>
+        <div class="items-center flex max-sm:flex-col gap-2 mb-2">
+          <div class="mx-3 md:text-xl items-center gap-2 flex">
+            <button
+              (click)="
+                updateCartProductQuantity(prod.product._id, prod.count + 1)
+              "
+            >
+              <i class="text-2xl text-green-700 fa fa-plus-square"></i>
+            </button>
+            <span class="text-black"> {{ prod.count }} </span>
+            <button
+              (click)="
+                updateCartProductQuantity(prod.product._id, prod.count - 1)
+              "
+            >
+              <i class="text-2xl text-green-700 fa fa-minus-square"></i>
+            </button>
+          </div>
+          <button
+            (click)="removeProduct(prod.product._id)"
+            class="block border mx-2 px-3 py-2 hover:bg-red-500 duration-500 bg-red-600 rounded text-white"
+          >
+            <i class="fas fa fa-trash-can"></i>
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+    }
+
+    <button
+      [swal]="{
+        title: 'are You Sure to Delet Cart Item',
+        showCancelButton: true
+      }"
+      (confirm)="deleteCart()"
+      class="w-[30%] capitalize my-4 px-3 py-3 mx-auto block hover:text-white font-medium hover:bg-red-800 rounded bg-red-600 text-gray-800 bg-opacity-90 border-b-2 duration-500"
+    >
+      clear cart
+    </button>
+
+    } @else{
+    <h1
+      class="text-slate-900 font-serif text-center text-xl dark:text-white capitalize"
+    >
+      your cart is empty put some product in cart and check out
+    </h1>
+    <img
+      src="/images/3780056.webp"
+      class="w-[50%] mx-auto object-contain"
+      alt="no item in cart "
+    />
+    }
+  </div>
 </section>
 }

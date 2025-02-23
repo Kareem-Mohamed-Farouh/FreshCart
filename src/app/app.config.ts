@@ -1,11 +1,15 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import {
   provideRouter,
   RouterModule,
   withHashLocation,
   withInMemoryScrolling,
 } from '@angular/router';
-
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { routes } from './app.routes';
 import { provideToastr } from 'ngx-toastr';
 import {
@@ -30,7 +34,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(
       routes,
-      withHashLocation(),
+      // withHashLocation(),
       withInMemoryScrolling({ scrollPositionRestoration: 'top' })
     ),
     provideClientHydration(withEventReplay()),
@@ -45,5 +49,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
 
     provideToastr(),
+    importProvidersFrom(SweetAlert2Module.forRoot()),
   ],
 };

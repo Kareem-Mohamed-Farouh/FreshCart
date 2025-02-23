@@ -9,6 +9,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { CartService } from '../../core/services/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { WishlistService } from '../../core/services/wishlist/wishlist.service';
+import { IWhishlist } from '../../shared/interfaces/whishlist/whishlist';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-details',
   imports: [CurrencyPipe, CarouselModule, RouterLink],
@@ -25,6 +27,7 @@ export class DetailsComponent {
   d: number = 1;
   detailData: IProducts = {} as IProducts;
   productData!: IProducts[];
+  wishData!: IWhishlist[];
   // detailData: IProducts | null = null;
 
   customOptions: OwlOptions = {
@@ -53,16 +56,16 @@ export class DetailsComponent {
   ngOnInit(): void {
     this.getDetails();
     this.getProductData();
+    this.getLogeduser();
   }
 
   getDetails() {
-    this.activatedRoute.paramMap.subscribe({
+    this.sub = this.activatedRoute.paramMap.subscribe({
       next: (res) => {
         this.detailsId = res.get('detailsId')!;
         this.productsService.getSpecificProduct(this.detailsId).subscribe({
           next: (res) => {
             console.log('details', res.data);
-
             this.detailData = res.data;
           },
         });
@@ -71,31 +74,47 @@ export class DetailsComponent {
   }
 
   addItemToCart(productId: string) {
-    this.cartService.addProductToCart(productId).subscribe({
+    this.sub = this.cartService.addProductToCart(productId).subscribe({
       next: (res) => {
         console.log(res);
         this.toastr.success(res.message, 'FreshCart!');
-      },
-      error: (err) => {
-        console.log(err);
       },
     });
   }
 
   addProductToWishlist(idprodd: string) {
-    this.wishlistService.addProductToWishlist(idprodd).subscribe({
+    this.sub = this.wishlistService.addProductToWishlist(idprodd).subscribe({
       next: (res) => {
         console.log(res);
         this.toastr.success(res.message, 'FreshCart');
+        this.wishlistService.wishCount.next(res.count);
+      },
+    });
+  }
+
+  getLogeduser() {
+    this.sub = this.wishlistService.getLoggedUserWishlist().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.wishlistService.wishCount.next(res.count);
+        this.wishData = res.data;
       },
     });
   }
 
   getProductData() {
-    this.productsService.getAllProducts().subscribe({
+    this.sub = this.productsService.getAllProducts().subscribe({
       next: (res) => {
         this.productData = res.data;
       },
     });
+  }
+
+  sub!: Subscription;
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    // console.log('dd');
+    this.sub.unsubscribe();
   }
 }

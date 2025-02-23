@@ -1,16 +1,17 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { BrandService } from '../../core/services/brand/brand.service';
 import { IBrands } from '../../shared/interfaces/brands/brands';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-brands',
   imports: [CarouselModule],
   templateUrl: './brands.component.html',
   styleUrl: './brands.component.scss',
 })
-export class BrandsComponent implements OnInit {
+export class BrandsComponent implements OnInit, OnDestroy {
   private readonly _BrandService = inject(BrandService);
   brandData!: IBrands[];
 
@@ -49,7 +50,7 @@ export class BrandsComponent implements OnInit {
   };
 
   getAllbrands() {
-    this._BrandService.getAllProducts().subscribe({
+    this.sub = this._BrandService.getAllProducts().subscribe({
       next: (res) => {
         console.log(res.data);
         this.brandData = res.data;
@@ -59,5 +60,12 @@ export class BrandsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllbrands();
+  }
+  sub!: Subscription;
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    // console.log('dd');
+    this.sub.unsubscribe();
   }
 }

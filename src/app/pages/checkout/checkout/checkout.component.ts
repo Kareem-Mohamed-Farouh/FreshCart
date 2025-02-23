@@ -52,35 +52,21 @@ export class CheckoutComponent implements OnInit {
     if (this.checkoutform.valid) {
       this.activatedRoute.paramMap.subscribe({
         next: (res) => {
-          console.log(res);
+          // console.log(res);
           this.idCart = res.get('idCart')!;
           //////////////////////////////
           this.ordersService
             .CheckOutSession(res.get('idCart')!, this.checkoutform.value)
             .subscribe({
               next: (res) => {
-                console.log(res);
+                // console.log(res);
                 if (res.status === 'success') {
                   open(res.session.url, '_self');
                 }
               },
-              error(err) {
-                console.log(err);
-              },
             });
         },
       });
-
-      // this.ordersService
-      //   .CreatCashOrders(this.idCart, this.checkoutform.value)
-      //   .subscribe({
-      //     next: (res) => {
-      //       console.log(res);
-      //     },
-      //     error(err) {
-      //       console.log(err);
-      //     },
-      //   });
     }
   }
 

@@ -1,1 +1,99 @@
-<p>all-order works!</p>
+@if(allOrderData){
+<div class="my-5 py-2">
+  <div class="" id="accordion-collapse" data-accordion="collapse">
+    <h2 id="accordion-collapse-heading-1">
+      <button
+        class="bg-slate-100 dark:bg-gray-900 w-full p-5 font-medium rtl:text-right border border-b-0 border-gray-200 rounded-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-yellow-500 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+        data-accordion-target="#accordion-collapse-body-1"
+        aria-expanded="true"
+        aria-controls="accordion-collapse-body-1"
+      >
+        <h1 class="text-4xl text-green-500 font-medium text-center capitalize">
+          All Order
+        </h1>
+      </button>
+    </h2>
+  </div>
+  @for (item of allOrderData; track $index) {
+  <h2>
+    <div
+      class="flex font-sans items-center mt-2 rounded-t-md flex-wrap text-center justify-between w-full p-5 font-medium rtl:text-right text-gray-700 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 bg-blue-100 dark:bg-gray-900 gap-3"
+    >
+      <span
+        class="bg-blue-500 py-2 px-3 capitalize rounded max-sm:font-medium max-sm:w-full text-white"
+        >Order id: {{ item.id }}</span
+      >
+      <!-- <span> {{item.user.name}}</span> -->
+      <p>
+        Total Order Money :
+        <span class="bg-red-500 py-2 px-3 rounded text-white">
+          {{ item.totalOrderPrice }}
+          EGP</span
+        >
+      </p>
+      <p class="my-2">
+        Payment Method :
+        <span class="bg-green-500 py-2 px-3 rounded capitalize text-white">{{
+          item.paymentMethodType
+        }}</span>
+      </p>
+      <p>
+        Date :<span class="text-yellow-500">
+          {{ item.updatedAt | date : "short" }}</span
+        >
+      </p>
+    </div>
+  </h2>
+  <div>
+    <div class="p-2 border border-b-0 border-gray-200 dark:border-gray-700">
+      @for (CartItems of item.cartItems; track $index) {
+      <div
+        class="flex justify-between rounded mb-2 flex-wrap max-md:flex-col p-5 bg-blue-50 dark:bg-slate-900 cart-product"
+      >
+        <div
+          class="flex flex-wrap capitalize max-md:flex-col dark:text-yellow-200 text-slate-900"
+        >
+          <img
+            [src]="CartItems.product.imageCover"
+            class="h-[100px] object-contain"
+            alt=""
+          />
+          <div class="sm:ms-4">
+            <p class="dark:text-white font-medium">
+              {{ CartItems.product.title }}
+            </p>
+            <p>
+              Category:
+              <span class="dark:text-white text-green-600">{{
+                CartItems.product.category.name
+              }}</span>
+            </p>
+
+            <p>
+              Brand:
+              <span class="dark:text-white text-green-600">{{
+                CartItems.product.brand.name
+              }}</span>
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="flex flex-col sm:justify-between bg-blue-100 dark:bg-slate-700 p-2 rounded"
+        >
+          <span class="dark:text-green-600"
+            >Piece Price : {{ CartItems.price }} EGP</span
+          >
+          <span class="dark:text-green-600">Count : {{ CartItems.count }}</span>
+          <span class="font-medium text-green-500"
+            >Toatal Price :{{ CartItems.count * CartItems.price }} EGP</span
+          >
+        </div>
+      </div>
+
+      }
+    </div>
+  </div>
+  }
+</div>
+}

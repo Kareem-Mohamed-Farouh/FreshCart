@@ -20,6 +20,7 @@ import { CartService } from '../../core/services/cart/cart.service';
 import { ChangerheartDirective } from '../../shared/directives/changeHeart/changerheart.directive';
 import { ToastrService } from 'ngx-toastr';
 import { IWhishlist } from '../../shared/interfaces/whishlist/whishlist';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-home',
   imports: [
@@ -123,7 +124,7 @@ export class HomeComponent implements OnInit {
     });
   }
   getLogeduser() {
-    this.wishlistService.getLoggedUserWishlist().subscribe({
+    this.sub = this.wishlistService.getLoggedUserWishlist().subscribe({
       next: (res) => {
         console.log(res);
         this.wishlistService.wishCount.next(res.count);
@@ -133,19 +134,16 @@ export class HomeComponent implements OnInit {
   }
 
   addItemToCart(productId: string) {
-    this.cartService.addProductToCart(productId).subscribe({
+    this.sub = this.cartService.addProductToCart(productId).subscribe({
       next: (res) => {
         console.log(res);
         this.toastr.success(res.message, 'FreshCart!');
-      },
-      error: (err) => {
-        console.log(err);
       },
     });
   }
 
   addProductToWishList(idprod: string) {
-    this.wishlistService.addProductToWishlist(idprod).subscribe({
+    this.sub = this.wishlistService.addProductToWishlist(idprod).subscribe({
       next: (res) => {
         console.log(res);
         this.getLogeduser();
@@ -156,13 +154,22 @@ export class HomeComponent implements OnInit {
   }
 
   removProductFromWishlist(idprodd: string) {
-    this.wishlistService.RemoveProductFromWishlist(idprodd).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.getLogeduser();
-        this.toastr.info(res.message, 'FreshCart');
-        this.wishlistService.wishCount.next(res.count);
-      },
-    });
+    this.sub = this.wishlistService
+      .RemoveProductFromWishlist(idprodd)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.getLogeduser();
+          this.toastr.info(res.message, 'FreshCart');
+          this.wishlistService.wishCount.next(res.count);
+        },
+      });
+  }
+  sub!: Subscription;
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    // console.log('');
+    this.sub.unsubscribe();
   }
 }

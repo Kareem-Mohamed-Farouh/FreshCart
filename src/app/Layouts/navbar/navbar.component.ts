@@ -21,8 +21,10 @@ import { IWhishlist } from '../../shared/interfaces/whishlist/whishlist';
 export class NavbarComponent {
   isLogin = input<boolean>(false);
   isScroll: Boolean = false;
+  logoutt: Boolean = true;
 
   public wishlistService = inject(WishlistService);
+  private readonly authService = inject(AuthService);
 
   @HostListener('window:scroll') onScroll() {
     if (scrollY > 0) {
@@ -32,10 +34,15 @@ export class NavbarComponent {
     }
   }
 
-  readonly authService = inject(AuthService);
+  // readonly authService = inject(AuthService);
   // // OR
-  //  private readonly authService = inject(AuthService);
-  // loguot() {
-  //   this.authService.logoutUser();
-  // }
+  loguot() {
+    this.logoutt = false;
+  }
+  sure() {
+    this.authService.logoutUser();
+  }
+  cancel() {
+    this.logoutt = true;
+  }
 }

@@ -50,9 +50,6 @@ export class SpicificCatDetailsComponent implements OnInit {
           },
         });
       },
-      error: (err) => {
-        console.log(err);
-      },
     });
   }
 

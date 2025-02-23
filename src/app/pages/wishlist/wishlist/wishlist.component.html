@@ -1,3 +1,6 @@
+@if(res.count !== 0){
+
+
 @for( item of wishlistData ;track $index){
 <div class=" p-5 border-b-2 dark:border-green-600 dark:bg-gray-900 mb- dark:text-white border-black">
     <div class="xl:max-w-screen-xl lg:max-w-screen-lg max-w-xl mx-auto">
@@ -96,4 +99,9 @@
 
 
 </div>
+}
+}
+@else {
+
+<img src="/images/no_wish_list.png" class="w-[25%] object-contain mx-auto" alt="no wish list data">
 }

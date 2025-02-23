@@ -35,7 +35,7 @@ export class AuthService {
       console.log(this.userData);
     }
   }
-
+  logoutt: Boolean = true;
   logoutUser(): void {
     // 1- remove token
     localStorage.removeItem('token');

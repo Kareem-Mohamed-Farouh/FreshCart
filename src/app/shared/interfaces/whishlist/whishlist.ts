@@ -33,3 +33,8 @@ interface Subcategory {
   slug: string;
   category: string;
 }
+export interface IWishstatues {
+  status: string;
+  count: number;
+  data: any[];
+}

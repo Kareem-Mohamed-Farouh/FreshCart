@@ -9,8 +9,6 @@ import { environment } from '../../environment/environment';
 export class OrdersService {
   constructor(private readonly httpClient: HttpClient) {}
 
-
-
   getAllOrders(): Observable<any> {
     return this.httpClient.get(`${environment.baseUrl}/api/v1/orders/`);
   }
@@ -33,6 +31,7 @@ export class OrdersService {
   CheckOutSession(cartId: string, userDetails: object): Observable<any> {
     return this.httpClient.post(
       `${environment.baseUrl}/api/v1/orders/checkout-session/${cartId}?url=${environment.host}`,
+
       {
         shippingAddress: userDetails,
       }

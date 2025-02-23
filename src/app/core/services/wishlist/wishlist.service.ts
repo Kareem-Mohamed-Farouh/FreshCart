@@ -9,7 +9,7 @@ import { environment } from '../../environment/environment';
 export class WishlistService {
   // wishCount = signal(0);
   wishCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  myToken: string = localStorage.getItem('token') || '';
+  myToken: string = localStorage.getItem('token') || ' ';
 
   constructor(private readonly httpClient: HttpClient) {
     if (this.myToken !== null) {

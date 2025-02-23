@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ProductsService } from '../../core/services/products/products.service';
 import { IProducts } from '../../shared/interfaces/IProducts/iproducts';
 import { CartService } from '../../core/services/cart/cart.service';
@@ -6,6 +6,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { WishlistService } from '../../core/services/wishlist/wishlist.service';
 import { IWhishlist } from '../../shared/interfaces/whishlist/whishlist';
 import { RouterLink } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -13,7 +14,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
   private readonly productsService = inject(ProductsService);
   private readonly cartService = inject(CartService);
   private readonly wishlistService = inject(WishlistService);
@@ -27,7 +28,16 @@ export class ProductsComponent implements OnInit {
   }
 
   getproductData(): void {
-    this.productsService.getAllProducts().subscribe({
+    this.sub = this.productsService.getAllProducts().subscribe({
+      next: (res) => {
+        // console.log(res.data);
+        this.products = res.data;
+      },
+    });
+  }
+
+  getproductData2(): void {
+    this.sub = this.productsService.getAllProducts2().subscribe({
       next: (res) => {
         // console.log(res.data);
         this.products = res.data;
@@ -36,10 +46,9 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(prodId: string): void {
-    this.cartService.addProductToCart(prodId).subscribe({
+    this.sub = this.cartService.addProductToCart(prodId).subscribe({
       next: (res) => {
         console.log(res);
-
         if (res.status === 'success') {
           this.toastr.success(`${res.message}`, 'FreshCart');
         }
@@ -48,31 +57,43 @@ export class ProductsComponent implements OnInit {
   }
 
   getLogged() {
-    this.wishlistService.getLoggedUserWishlist().subscribe({
+    this.sub = this.wishlistService.getLoggedUserWishlist().subscribe({
       next: (res) => {
         console.log(res.data);
+        this.wishlistService.wishCount.next(res.count);
         this.wishData = res.data;
       },
     });
   }
 
   addProductToWishlist(idProd: string) {
-    this.wishlistService.addProductToWishlist(idProd).subscribe({
+    this.sub = this.wishlistService.addProductToWishlist(idProd).subscribe({
       next: (res) => {
         console.log(res.data);
         this.getLogged();
         this.toastr.success(res.message, 'FreshCart');
+        this.wishlistService.wishCount.next(res.count);
       },
     });
   }
 
   RemoveProductFromWishlist(idProd: string) {
-    this.wishlistService.RemoveProductFromWishlist(idProd).subscribe({
-      next: (res) => {
-        console.log(res.data);
-        this.getLogged();
-        this.toastr.error(res.message, 'FreshCart');
-      },
-    });
+    this.sub = this.wishlistService
+      .RemoveProductFromWishlist(idProd)
+      .subscribe({
+        next: (res) => {
+          console.log(res.data);
+          this.getLogged();
+          this.toastr.error(res.message, 'FreshCart');
+          this.wishlistService.wishCount.next(res.count);
+        },
+      });
+  }
+  sub!: Subscription;
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    // console.log('dd');
+    this.sub.unsubscribe();
   }
 }
