@@ -6,6 +6,7 @@ import {
   ElementRef,
   HostListener,
   inject,
+  OnDestroy,
   OnInit,
 } from '@angular/core';
 import { ProductsService } from '../../../core/services/products/products.service';
@@ -22,31 +23,29 @@ import { RouterLink } from '@angular/router';
 import { CartService } from '../../../core/services/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { IWhishlist } from '../../../shared/interfaces/whishlist/whishlist';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-homelogin',
-  imports: [
-    CarouselModule,
-    HomeSliderComponent,
-    SearchPipe,
-    FormsModule,
-    RouterLink,
-  ],
+  imports: [CarouselModule, HomeSliderComponent, SearchPipe, FormsModule],
   templateUrl: './homelogin.component.html',
   styleUrl: './homelogin.component.scss',
 })
-export class HomeloginComponent implements OnInit {
+export class HomeloginComponent implements OnInit, OnDestroy {
   private readonly productsService = inject(ProductsService);
   private readonly categoryService = inject(CategoryService);
   private readonly wishlistService = inject(WishlistService);
-
+  toastr = inject(ToastrService);
   private readonly cartService = inject(CartService);
   private readonly elementRef = inject(ElementRef);
 
-  toastr = inject(ToastrService);
-  searchWord: string = '';
-  products!: IProducts[];
   isInWishlist: boolean = true;
+  categoryData!: ICategory[];
+  products!: IProducts[];
+  wishData!: IWhishlist[];
+  searchWord: string = '';
+  subscribtion!: Subscription;
+
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -100,7 +99,6 @@ export class HomeloginComponent implements OnInit {
     nav: false, // أو يمكن تفعيلها إذا أردت أزرار التنقل
   };
 
-  wishData!: IWhishlist[];
   ngOnInit(): void {
     this.getproductData();
     this.getcategryData();
@@ -108,25 +106,19 @@ export class HomeloginComponent implements OnInit {
   }
 
   getproductData() {
-    this.productsService.getAllProducts().subscribe({
+    this.subscribtion = this.productsService.getAllProducts().subscribe({
       next: (res) => {
         // console.log(res.data);
         this.products = res.data;
       },
-      error: (err) => {
-        console.log(err);
-      },
     });
   }
-  categoryData!: ICategory[];
+
   getcategryData() {
-    this.categoryService.getCategories().subscribe({
+    this.subscribtion = this.categoryService.getCategories().subscribe({
       next: (res) => {
         this.categoryData = res.data;
         console.log(res.data);
-      },
-      error: (err) => {
-        console.log(err);
       },
     });
   }
@@ -135,47 +127,7 @@ export class HomeloginComponent implements OnInit {
     this.toastr.info(`you Must login to ${message}`, 'FreshCart!');
   }
 
-  // getLogeduser() {
-  //   this.wishlistService.getLoggedUserWishlist().subscribe({
-  //     next: (res) => {
-  //       console.log(res);
-  //       this.wishlistService.wishCount.next(res.count);
-  //       this.wishData = res.data;
-  //     },
-  //   });
-  // }
-
-  // addItemToCart(productId: string) {
-  //   this.cartService.addProductToCart(productId).subscribe({
-  //     next: (res) => {
-  //       console.log(res);
-  //       this.toastr.success(res.message, 'FreshCart!');
-  //     },
-  //     error: (err) => {
-  //       console.log(err);
-  //     },
-  //   });
-  // }
-
-  // addProductToWishList(idprod: string) {
-  //   this.wishlistService.addProductToWishlist(idprod).subscribe({
-  //     next: (res) => {
-  //       console.log(res);
-  //       this.getLogeduser();
-  //       this.toastr.success(res.message, 'FreshCart!');
-  //       this.wishlistService.wishCount.next(res.count);
-  //     },
-  //   });
-  // }
-
-  // removProductFromWishlist(idprodd: string) {
-  //   this.wishlistService.RemoveProductFromWishlist(idprodd).subscribe({
-  //     next: (res) => {
-  //       console.log(res);
-  //       this.getLogeduser();
-  //       this.toastr.info(res.message, 'FreshCart');
-  //       this.wishlistService.wishCount.next(res.count);
-  //     },
-  //   });
-  // }
+  ngOnDestroy(): void {
+    this.subscribtion.unsubscribe();
+  }
 }
