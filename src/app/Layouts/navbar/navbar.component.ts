@@ -11,6 +11,7 @@ import {
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { WishlistService } from '../../core/services/wishlist/wishlist.service';
 import { IWhishlist } from '../../shared/interfaces/whishlist/whishlist';
+import { CartService } from '../../core/services/cart/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -24,6 +25,7 @@ export class NavbarComponent {
   logoutt: Boolean = true;
 
   public wishlistService = inject(WishlistService);
+  public cartService = inject(CartService);
   private readonly authService = inject(AuthService);
 
   @HostListener('window:scroll') onScroll() {

@@ -1,6 +1,7 @@
 <nav
-  [class.py-2]="isScroll"
-  class="duration-500 fixed bg-gray-100 dark:bg-slate-900 w-full z-50 top-0 start-0 border-b border-gray-200 dark:border-gray-600"
+  [class.py-1]="isScroll"
+  [class.px-8]="isScroll"
+  class="duration-700 fixed bg-gray-100 dark:bg-slate-900 w-full z-50 top-0 start-0 border-b border-gray-200 dark:border-gray-600"
 >
   <div
     class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto py-3 max-sm:px-4 sm:px-8"
@@ -99,6 +100,17 @@
       class="ms-auto flex md:order-2 items-center space-x-3 md:space-x-0 rtl:space-x-reverse"
     >
       <div class="items-center flex mx-2">
+        <label class="flex flex-col items-center cursor-pointer">
+          <input type="checkbox" id="toggel" value="" class="sr-only peer" />
+          <div
+            class="mb-3 mt-1 relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600 dark:peer-checked:bg-green-600"
+          ></div>
+          <p
+            class="max-sm:hidden text-sm font-medium text-gray-900 dark:text-gray-300"
+          >
+            Mood
+          </p>
+        </label>
         @if(!isLogin()){
         <div class="max-sm:hidden items-center flex text-xl gap-5 me-4">
           <a href=""
@@ -143,8 +155,12 @@
         >
           <a
             class="block transition-all duration-500 py-1 group-hover:text-green-600 text-gray-900 rounded px-3 dark:text-gray-50"
-            ><i class="text-2xl fas fa-cart-shopping"></i
-          ></a>
+            ><i class="relative text-2xl fas fa-cart-shopping"></i>
+            <span
+              class="relative text-lg font-medium top-[5px] start-[3%] text-green-600 bg-white p-1 font-serif rounded-full"
+              >{{ cartService.cartCount.getValue() }}</span
+            >
+          </a>
           <span class="max-md:hidden font-serif">Cart</span>
         </li>
 
@@ -173,9 +189,11 @@
         >
           LogOut
         </button>
+
         }
       </div>
     </div>
+
     @if(isLogin()){
     <button
       data-collapse-toggle="navbar-sticky"

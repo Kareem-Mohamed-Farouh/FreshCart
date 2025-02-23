@@ -78,6 +78,7 @@ export class DetailsComponent {
       next: (res) => {
         console.log(res);
         this.toastr.success(res.message, 'FreshCart!');
+        this.cartService.cartCount.next(res.numOfCartItems);
       },
     });
   }
@@ -86,22 +87,21 @@ export class DetailsComponent {
     this.sub = this.wishlistService.addProductToWishlist(idprodd).subscribe({
       next: (res) => {
         console.log(res);
+        // this.getLogeduser();
         this.toastr.success(res.message, 'FreshCart');
-        this.wishlistService.wishCount.next(res.count);
+        this.wishlistService.wishCount.next(res.data.length);
       },
     });
   }
-
   getLogeduser() {
     this.sub = this.wishlistService.getLoggedUserWishlist().subscribe({
       next: (res) => {
         console.log(res);
-        this.wishlistService.wishCount.next(res.count);
+
         this.wishData = res.data;
       },
     });
   }
-
   getProductData() {
     this.sub = this.productsService.getAllProducts().subscribe({
       next: (res) => {
@@ -109,11 +109,8 @@ export class DetailsComponent {
       },
     });
   }
-
   sub!: Subscription;
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
     // console.log('dd');
     this.sub.unsubscribe();
   }

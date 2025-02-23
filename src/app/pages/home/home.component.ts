@@ -1,26 +1,18 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  inject,
-  OnInit,
-} from '@angular/core';
-import { WishlistService } from './../../core/services/wishlist/wishlist.service';
-import { ProductsService } from '../../core/services/products/products.service';
-import { IProducts } from '../../shared/interfaces/IProducts/iproducts';
-import { CarouselModule } from 'ngx-owl-carousel-o';
-import { OwlOptions } from 'ngx-owl-carousel-o';
-import { CategoryService } from '../../core/services/Category/category.service';
-import { ICategory } from '../../shared/interfaces/icategories';
-import { HomeSliderComponent } from '../../shared/components/homeSlider/home-slider/home-slider.component';
-import { FormsModule, NgModel } from '@angular/forms';
-import { SearchPipe } from '../../shared/pipes/search/search.pipe';
+import { Component, ElementRef, inject, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { CartService } from '../../core/services/cart/cart.service';
-import { ChangerheartDirective } from '../../shared/directives/changeHeart/changerheart.directive';
+import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { ToastrService } from 'ngx-toastr';
-import { IWhishlist } from '../../shared/interfaces/whishlist/whishlist';
 import { Subscription } from 'rxjs';
+import { CartService } from '../../core/services/cart/cart.service';
+import { CategoryService } from '../../core/services/Category/category.service';
+import { ProductsService } from '../../core/services/products/products.service';
+import { HomeSliderComponent } from '../../shared/components/homeSlider/home-slider/home-slider.component';
+import { ICategory } from '../../shared/interfaces/icategories';
+import { IProducts } from '../../shared/interfaces/IProducts/iproducts';
+import { IWhishlist } from '../../shared/interfaces/whishlist/whishlist';
+import { SearchPipe } from '../../shared/pipes/search/search.pipe';
+import { WishlistService } from './../../core/services/wishlist/wishlist.service';
 @Component({
   selector: 'app-home',
   imports: [
@@ -47,6 +39,7 @@ export class HomeComponent implements OnInit {
   categoryData!: ICategory[];
   wishData!: IWhishlist[];
   products!: IProducts[];
+  sub!: Subscription;
 
   customOptions: OwlOptions = {
     loop: true,
@@ -138,6 +131,7 @@ export class HomeComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.toastr.success(res.message, 'FreshCart!');
+        this.cartService.cartCount.next(res.numOfCartItems);
       },
     });
   }
@@ -165,10 +159,8 @@ export class HomeComponent implements OnInit {
         },
       });
   }
-  sub!: Subscription;
+
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
     // console.log('');
     this.sub.unsubscribe();
   }

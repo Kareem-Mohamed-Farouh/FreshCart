@@ -43,7 +43,7 @@ export class CategoriesComponent implements OnInit {
   getallproduct() {
     this.sub = this.productsService.getAllProducts().subscribe({
       next: (res) => {
-        // console.log(res.data);
+        console.log(res.data);
         this.productData = res.data;
       },
     });
@@ -52,9 +52,10 @@ export class CategoriesComponent implements OnInit {
   addToCart(prodId: string): void {
     this.sub = this.cartService.addProductToCart(prodId).subscribe({
       next: (res) => {
-        console.log(res);
+        console.log(res.data);
         if (res.status === 'success') {
           this.toastr.success(`${res.message}`, 'FreshCart');
+          this.cartService.cartCount.next(res.numOfCartItems);
         }
       },
     });
@@ -63,9 +64,9 @@ export class CategoriesComponent implements OnInit {
   getspecificCategory(catId: string) {
     this.sub = this.categoryService.getSpecificCategories(catId).subscribe({
       next: (res) => {
-        // console.log(res.data);
-        this.clickd = false;
+        console.log(res.data);
         this.spicCategoryData = res.data;
+        this.clickd = false;
         this.toastr.success(`${res.message}`, 'FreshCart');
       },
     });

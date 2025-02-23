@@ -10,6 +10,7 @@ import { WishlistService } from '../../../core/services/wishlist/wishlist.servic
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from '../../../core/services/cart/cart.service';
 import { ChangerheartDirective } from '../../../shared/directives/changeHeart/changerheart.directive';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-spicific-cat-details',
   imports: [DatePipe, RouterLink, ChangerheartDirective],
@@ -58,28 +59,24 @@ export class SpicificCatDetailsComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.toastr.success(res.message, 'FreshCart!');
+        this.wishlistService.wishCount.next(res.data.length);
       },
     });
   }
-
-  // removProductFromWishlist(id: string) {
-  //   this.wishlistService.RemoveProductFromWishlist(id).subscribe({
-  //     next: (res) => {
-  //       console.log(res);
-  //       this.toastr.success(res.message, 'FreshCart');
-  //     },
-  //   });
-  // }
 
   addItemToCart(productId: string) {
     this.cartService.addProductToCart(productId).subscribe({
       next: (res) => {
         console.log(res);
         this.toastr.success(res.message, 'FreshCart!');
-      },
-      error: (err) => {
-        console.log(err);
+        this.cartService.cartCount.next(res.numOfCartItems);
       },
     });
+  }
+
+  sub!: Subscription;
+  ngOnDestroy(): void {
+    // console.log('');
+    this.sub.unsubscribe();
   }
 }

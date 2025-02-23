@@ -106,8 +106,8 @@
   <div
     class="w-full gap-5 grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
   >
-    @for (prod of productData ; track prod._id) { @if( prod.category._id ===
-    spicCategoryData._id){
+    @for (prod of productData ; track $index) { @if(
+    spicCategoryData._id===prod.category._id ){
     <div
       class="cursor-pointer card group overflow-hidden border border-green-300 rounded-md relative"
     >

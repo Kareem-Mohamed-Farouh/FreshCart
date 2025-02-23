@@ -50,6 +50,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       next: (res) => {
         console.log(res);
         if (res.status === 'success') {
+          this.cartService.cartCount.next(res.numOfCartItems);
           this.toastr.success(`${res.message}`, 'FreshCart');
         }
       },
@@ -59,8 +60,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   getLogged() {
     this.sub = this.wishlistService.getLoggedUserWishlist().subscribe({
       next: (res) => {
-        console.log(res.data);
-        this.wishlistService.wishCount.next(res.count);
+        // console.log(res.data);
         this.wishData = res.data;
       },
     });
@@ -69,7 +69,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   addProductToWishlist(idProd: string) {
     this.sub = this.wishlistService.addProductToWishlist(idProd).subscribe({
       next: (res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.getLogged();
         this.toastr.success(res.message, 'FreshCart');
         this.wishlistService.wishCount.next(res.count);
