@@ -6,7 +6,7 @@ module.exports = {
     container: { center: true },
   },
   plugins: [require('flowbite/plugin')],// add this line
-  darkMode: 'selector'
+  // darkMode: 'selector'
 
 }
 

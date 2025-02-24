@@ -26,7 +26,7 @@ export class CartComponent implements OnInit, OnDestroy {
   getCartData() {
     this.sub = this.cartService.GetLoggedUserCart().subscribe({
       next: (res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.cartData = res.data;
       },
     });
@@ -38,6 +38,7 @@ export class CartComponent implements OnInit, OnDestroy {
         // console.log(res.data);
         // this.getCartData(); xxxxx
         this.cartData = res.data; //   ////
+        this.cartService.cartCount.next(res.numOfCartItems);
       },
     });
   }
@@ -49,6 +50,7 @@ export class CartComponent implements OnInit, OnDestroy {
         next: (res) => {
           // console.log(res.data);
           this.cartData = res.data;
+          this.cartService.cartCount.next(res.numOfCartItems);
         },
       });
   }
@@ -60,6 +62,7 @@ export class CartComponent implements OnInit, OnDestroy {
         if (res.message === 'success') {
           this.cartData = {} as ICart;
           this.getCartData();
+          this.cartService.cartCount.next(res.numOfCartItems);
           // this.router.navigate(['/home']);
         }
       },
@@ -72,6 +75,4 @@ export class CartComponent implements OnInit, OnDestroy {
     console.log('dd');
     this.sub.unsubscribe();
   }
-
-  handleDenial() {}
 }

@@ -113,7 +113,9 @@
       </div>
       <div class="flex justify-between flex-wrap max-sm:flex-col items-center">
         <div class="max-sm:text-center my-2">
-          <h3 class="font-medium text-gray-900">{{ prod.product.title }}</h3>
+          <h3 class="font-medium text-gray-900 text-wrap">
+            {{ prod.product.title }}
+          </h3>
           <span class="text-lg text-green-700">
             price : {{ prod.price | currency : "GBP" }}
           </span>
@@ -140,8 +142,12 @@
             </button>
           </div>
           <button
-            (click)="removeProduct(prod.product._id)"
-            class="block border mx-2 px-3 py-2 hover:bg-red-500 duration-500 bg-red-600 rounded text-white"
+            [swal]="{
+              title: 'are You Sure to Delet this Item',
+              showCancelButton: true
+            }"
+            (confirm)="removeProduct(prod.product._id)"
+            class="block border mx-2 px-3 py-2 hover:bg-red-600 duration-500 bg-red-700 rounded text-white"
           >
             <i class="fas fa fa-trash-can"></i>
             Remove
@@ -157,7 +163,7 @@
         showCancelButton: true
       }"
       (confirm)="deleteCart()"
-      class="w-[30%] capitalize my-4 px-3 py-3 mx-auto block hover:text-white font-medium hover:bg-red-800 rounded bg-red-600 text-gray-800 bg-opacity-90 border-b-2 duration-500"
+      class="max-sm:w-[90%] sm:w-[40%] capitalize my-4 px-3 py-3 mx-auto block hover:text-white font-medium hover:bg-red-800 rounded bg-red-600 text-gray-800 bg-opacity-95 border-b-2 duration-500"
     >
       clear cart
     </button>

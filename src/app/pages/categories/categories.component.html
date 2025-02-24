@@ -1,4 +1,4 @@
-@if(categoryData && productData ){
+@if(categoryData ){
 
 <section class="">
   <h1 class="text-4xl text-center my-3 text-green-500 font-medium">
@@ -7,6 +7,21 @@
   <div
     class="grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
   >
+    <div
+      class="flex justify-between items-center rounded bg-gray-300 m-1 p-2 hover:translate-x-2 duration-500"
+    >
+      <img
+        src="/images/freshcart-logo.svg"
+        class="w-[30%] h-[50px] rounded object-contain"
+        alt=""
+      />
+      <button
+        (click)="getallproduct()"
+        class="w-[70%] px-3 py-2 bg-green-500 rounded"
+      >
+        All Product
+      </button>
+    </div>
     @for (cat of categoryData; track $index) {
     <div
       class="flex justify-between items-center rounded bg-gray-300 m-1 p-2 hover:translate-x-2 duration-500"
@@ -25,15 +40,16 @@
     </div>
     }
   </div>
-  @if(clickd && productData){
-  <div class="flex flex-wrap">
+
+  @if(clickd ){
+  <div class="" class="flex flex-wrap">
     <h1
       class="text-4xl text-center mx-auto my-2 border-y-4 border-green-500 inline py-3 text-green-500 font-medium"
     >
       ALL Categories product
     </h1>
     <div class="flex flex-wrap gap-2">
-      @for (prod of productData ; track prod._id) {
+      @for (prod of productData ; track $index) {
       <div
         class="w-[24%] card cursor-pointer mx-auto my-3 group overflow-hidden border border-green-300 rounded-md relative"
       >
@@ -84,7 +100,7 @@
         </button>
         }@else{
         <button
-          (click)="addToCart(prod._id)"
+          (click)="addToCart(prod.id)"
           class="translate-y-[100%] group-hover:translate-y-0 duration-700 opacity-0 group-hover:opacity-100 transition-all py-2 bg-orange-500 text-white block w-[90%] mx-auto rounded"
         >
           Add To Cart
@@ -95,7 +111,7 @@
     </div>
   </div>
 
-  } @if(!clickd){
+  } @if(clickd){
   <h4
     class="text-2xl text-center text-green-400 py-2 px-4 my-4 bg-white border-y-2 border-green-500"
   >
@@ -106,8 +122,8 @@
   <div
     class="w-full gap-5 grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
   >
-    @for (prod of productData ; track $index) { @if(
-    spicCategoryData._id===prod.category._id ){
+    @for (prod of productData ; track $index) { @if( prod.category._id ===
+    spicCategoryData._id){
     <div
       class="cursor-pointer card group overflow-hidden border border-green-300 rounded-md relative"
     >

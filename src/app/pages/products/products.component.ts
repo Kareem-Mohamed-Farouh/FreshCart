@@ -69,10 +69,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
   addProductToWishlist(idProd: string) {
     this.sub = this.wishlistService.addProductToWishlist(idProd).subscribe({
       next: (res) => {
-        // console.log(res.data);
+        console.log(res);
         this.getLogged();
         this.toastr.success(res.message, 'FreshCart');
-        this.wishlistService.wishCount.next(res.count);
+        this.wishlistService.wishCount.next(res.data.length);
       },
     });
   }
@@ -82,10 +82,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
       .RemoveProductFromWishlist(idProd)
       .subscribe({
         next: (res) => {
-          console.log(res.data);
+          console.log(res);
           this.getLogged();
           this.toastr.error(res.message, 'FreshCart');
-          this.wishlistService.wishCount.next(res.count);
+          this.wishlistService.wishCount.next(res.data.length);
         },
       });
   }

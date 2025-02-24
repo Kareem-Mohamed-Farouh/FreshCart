@@ -24,7 +24,7 @@ export class CategoriesComponent implements OnInit {
   categoryData!: ICategory[];
   productData!: IProducts[];
   spicCategoryData!: ICategory;
-  clickd: boolean = true;
+  clickd!: boolean;
   sub!: Subscription;
 
   ngOnInit(): void {
@@ -45,6 +45,8 @@ export class CategoriesComponent implements OnInit {
       next: (res) => {
         console.log(res.data);
         this.productData = res.data;
+        this.toastr.success(`${res.message}`, 'FreshCart');
+        this.clickd = true;
       },
     });
   }
@@ -53,9 +55,10 @@ export class CategoriesComponent implements OnInit {
     this.sub = this.cartService.addProductToCart(prodId).subscribe({
       next: (res) => {
         console.log(res.data);
+        // this.cartService.cartCount.next(res.data._v);
         if (res.status === 'success') {
-          this.toastr.success(`${res.message}`, 'FreshCart');
           this.cartService.cartCount.next(res.numOfCartItems);
+          this.toastr.success(`${res.message}`, 'FreshCart');
         }
       },
     });
@@ -66,8 +69,7 @@ export class CategoriesComponent implements OnInit {
       next: (res) => {
         console.log(res.data);
         this.spicCategoryData = res.data;
-        this.clickd = false;
-        this.toastr.success(`${res.message}`, 'FreshCart');
+        // this.toastr.success(`${res.message}`, 'FreshCart');
       },
     });
   }
