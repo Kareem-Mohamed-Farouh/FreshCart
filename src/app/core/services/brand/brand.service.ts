@@ -9,11 +9,11 @@ import { environment } from '../../environment/environment';
 export class BrandService {
   constructor(private readonly httpClient: HttpClient) {}
 
-  getAllProducts(): Observable<any> {
+  getAllBrands(): Observable<any> {
     return this.httpClient.get(`${environment.baseUrl}/api/v1/brands`);
   }
 
-  getSpecificProducts(id: string): Observable<any> {
-    return this.httpClient.get(`${environment.baseUrl}/api/v1/brands${id}`);
+  getSpecificBrand(id: string): Observable<any> {
+    return this.httpClient.get(`${environment.baseUrl}/api/v1/brands/${id}`);
   }
 }

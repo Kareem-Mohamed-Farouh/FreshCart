@@ -1,6 +1,4 @@
-@if(categoryData ){
-
-<section class="">
+<section class="relative">
   <h1 class="text-4xl text-center my-3 text-green-500 font-medium">
     Our Categories
   </h1>
@@ -15,11 +13,12 @@
         class="w-[30%] h-[50px] rounded object-contain"
         alt=""
       />
+
       <button
-        (click)="getallproduct()"
+        (click)="getAllSubCategoriesOfCategory()"
         class="w-[70%] px-3 py-2 bg-green-500 rounded"
       >
-        All Product
+        All sub Ctegory
       </button>
     </div>
     @for (cat of categoryData; track $index) {
@@ -31,8 +30,9 @@
         class="w-[30%] h-[50px] rounded object-contain"
         alt=""
       />
+
       <button
-        (click)="getspecificCategory(cat._id)"
+        (click)="getAllSubCatOnSpecCat(cat._id)"
         class="w-[70%] px-3 py-2 bg-green-500 rounded"
       >
         {{ cat.name }}
@@ -40,142 +40,68 @@
     </div>
     }
   </div>
+</section>
 
-  @if(clickd ){
-  <div class="" class="flex flex-wrap">
-    <h1
-      class="text-4xl text-center mx-auto my-2 border-y-4 border-green-500 inline py-3 text-green-500 font-medium"
+@if(showModal){
+<div
+  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-[9999]"
+>
+  <div
+    class="overflow-hidden relative border-white border-2 shadow-sm flex dark:bg-slate-900 p-5 bg-white h-4/6 rounded-lg md:w-1/2 flex-col items-center"
+  >
+    <button
+      (click)="closeModal()"
+      class="text-green-700 text-3xl fa-solid fa-close absolute top-5 right-5"
+    ></button>
+    <div
+      class="flex items-center text-start w-full flex-wrap px-4 justify-between"
     >
-      ALL Categories product
-    </h1>
-    <div class="flex flex-wrap gap-2">
-      @for (prod of productData ; track $index) {
-      <div
-        class="w-[24%] card cursor-pointer mx-auto my-3 group overflow-hidden border border-green-300 rounded-md relative"
-      >
-        <div [routerLink]="['/details', prod._id]" class="card-image">
-          <img
-            [src]="prod.imageCover"
-            class="card-img-top h-[250px] w-full object-contain"
-            [alt]="prod.title"
-          />
-        </div>
-        <div [routerLink]="['/details', prod._id]">
-          <div class="card-body px-2">
-            <h4 class="text-green-600 py-1 text-center text-sm">
-              {{ prod.category.name }}
-            </h4>
-            <h3 class="card-title font-medium mb-1">
-              {{ prod.title.split(" ", 2).join(" ") }}
-            </h3>
-            <p class="card-text">Brand: {{ prod.brand.name }}</p>
-          </div>
-        </div>
-        <div class="flex justify-between mx-2 items-center">
-          <span class="font-medium">{{ prod.price }} EGP </span>
-          <span class="font-medium text-gray-500"
-            >Sold :({{ prod.sold }})
-          </span>
-        </div>
-        <div class="flex items-center justify-between mx-3 mb-1">
-          <div>
-            @for (star of [1,2,3,4,5].slice(0, prod.ratingsAverage); track
-            $index) {
-            <i class="fa-solid fa-star text-yellow-400"></i>
-            } @if (prod.ratingsAverage % 1 !== 0) {
-            <span><i class="fa-solid fa-star-half text-yellow-500"></i></span>
-            }
+      <div class="flex items-center w-1/2">
+        @if(spicCategoryData.image !== undefined && numberofSubCat !== 60){
+        <img
+          [src]="spicCategoryData.image"
+          class="object-contain h-[150px] w-3/5"
+          [alt]="spicCategoryData.name"
+        />
+        <h3 class="ms-4 font-serif font-semibold text-2xl text-green-700">
+          {{ spicCategoryData.name }}
+        </h3>
 
-            <span class="ms-1 text-gray-500">
-              ({{ prod.ratingsAverage }} )</span
-            >
-          </div>
-        </div>
-        @if($index %2 ==0 ){
-        <button
-          (click)="addToCart(prod._id)"
-          class="translate-y-[100%] group-hover:translate-y-0 duration-700 opacity-0 group-hover:opacity-100 transition-all py-2 bg-green-700 text-white block w-[90%] mx-auto rounded"
-        >
-          Add To Cart
-        </button>
-        }@else{
-        <button
-          (click)="addToCart(prod.id)"
-          class="translate-y-[100%] group-hover:translate-y-0 duration-700 opacity-0 group-hover:opacity-100 transition-all py-2 bg-orange-500 text-white block w-[90%] mx-auto rounded"
-        >
-          Add To Cart
-        </button>
+        } @else {
+        <img
+          src="/images/freshcart-logo.svg"
+          class="object-contain h-[100px] w-2/5"
+          [alt]="spicCategoryData.name"
+        />
+
         }
       </div>
+      <h3
+        class="ms-2 font-serif capitalize font-semibold text-xl text-green-700"
+      >
+        number of all subcatgory :{{ numberofSubCat }}
+      </h3>
+    </div>
+
+    <div class="overflow-y-auto h-[300px] border-y-2 w-full flex flex-wrap">
+      @if(numberofSubCat !== 0) { @for(item of AllspicCategoryData;track
+      $index){
+
+      <div class="bg-green-600 rounded m-2 w-[46%] flex px-3 py-2 text-white">
+        <div>{{ item.name }}</div>
+        <!-- <div>{{ item.createdAt | date : "short" }}</div> -->
+      </div>
+      } } @else {
+      <p
+        class="text-2xl mt-6 text-red-600 font-bold font-serif text-center w-full items-center"
+      >
+        NO SubCategories for this SubCategory ({{ spicCategoryData.name }}) yet
+      </p>
+      <i
+        class="fa-solid text-green-600 text-5xl mx-auto dark:text-white fa-face-sad-tear"
+      ></i>
       }
     </div>
   </div>
-
-  } @if(clickd){
-  <h4
-    class="text-2xl text-center text-green-400 py-2 px-4 my-4 bg-white border-y-2 border-green-500"
-  >
-    {{ spicCategoryData.name }}
-  </h4>
-  }
-
-  <div
-    class="w-full gap-5 grid max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
-  >
-    @for (prod of productData ; track $index) { @if( prod.category._id ===
-    spicCategoryData._id){
-    <div
-      class="cursor-pointer card group overflow-hidden border border-green-300 rounded-md relative"
-    >
-      <div [routerLink]="['/details', prod._id]" class="card-image">
-        <img
-          [src]="prod.imageCover"
-          class="card-img-top h-[250px] w-full object-contain"
-          [alt]="prod.title"
-        />
-      </div>
-      <div [routerLink]="['/details', prod._id]">
-        <div class="card-body px-2">
-          <h4 class="text-green-600 py-1 text-center text-sm">
-            {{ prod.category.name }}
-          </h4>
-          <h3 class="card-title font-medium mb-1">
-            {{ prod.title.split(" ", 2).join(" ") }}
-          </h3>
-          <p class="card-text">Brand: {{ prod.brand.name }}</p>
-        </div>
-      </div>
-      <div class="flex justify-between mx-2 items-center">
-        <span class="font-medium">{{ prod.price }} EGP </span>
-      </div>
-      <div class="flex items-center justify-between mx-3 mb-1">
-        <div>
-          @for (star of [1,2,3,4,5].slice(0, prod.ratingsAverage); track $index)
-          {
-          <i class="fa-solid fa-star text-yellow-400"></i>
-          } @if (prod.ratingsAverage % 1 !== 0) {
-          <span><i class="fa-solid fa-star-half text-yellow-500"></i></span>
-          }
-          <span class="ms-1 text-gray-500"> ({{ prod.ratingsAverage }} )</span>
-        </div>
-      </div>
-      @if($index %2 ==0 ){
-      <button
-        (click)="addToCart(prod._id)"
-        class="translate-y-[100%] group-hover:translate-y-0 duration-700 opacity-0 group-hover:opacity-100 transition-all py-2 bg-red-500 text-white block w-[90%] mx-auto rounded"
-      >
-        Add To Cart
-      </button>
-      }@else{
-      <button
-        (click)="addToCart(prod.id)"
-        class="translate-y-[100%] group-hover:translate-y-0 duration-700 opacity-0 group-hover:opacity-100 transition-all py-2 bg-orange-500 text-white block w-[90%] mx-auto rounded"
-      >
-        Add To Cart
-      </button>
-      }
-    </div>
-    } }
-  </div>
-</section>
+</div>
 }

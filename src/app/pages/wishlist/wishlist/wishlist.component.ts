@@ -67,6 +67,7 @@ export class WishlistComponent implements OnInit {
       next: (res) => {
         // console.log(res);
         this.toastr.success(res.message, 'FreshCart!');
+        this.cartService.cartCount.next(res.numOfCartItems);
       },
     });
   }

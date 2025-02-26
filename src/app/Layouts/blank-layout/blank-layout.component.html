@@ -1,10 +1,12 @@
-<div class="flex flex-col justify-between min-h-screen dark:bg-slate-800 dark:text-white ">
-    <app-navbar [isLogin]="true"></app-navbar>
+<div
+  class="flex flex-col justify-between min-h-screen dark:bg-slate-800 dark:text-white"
+>
+  <app-navbar [isLogin]="true"></app-navbar>
 
-    <div class="container mt-16 w-11/12 py-8 relative">
-        <router-outlet></router-outlet>
-    </div>
-    <div class="z-50">
-        <app-footer></app-footer>
-    </div>
+  <div class="container mt-16 w-11/12 py-8 relative">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="">
+    <app-footer></app-footer>
+  </div>
 </div>

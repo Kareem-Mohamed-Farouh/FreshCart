@@ -1,37 +1,90 @@
-<div class="mt-5 border-gray-950  border-y-2   py-2 ">
+@if(brandData){
+<div class="relative">
+  <div class="mt-5 border-gray-950 border-y-2 py-2">
     <owl-carousel-o class="" [options]="customOptions">
-        @for (brand of brandData; track $index) {
-        <ng-template carouselSlide>
-            <div class="cursor-pointer px-3 py-2   border border-black   ">
+      @for (brand of brandData; track $index) {
+      <ng-template carouselSlide>
+        <div class="cursor-pointer px-3 py-2 border border-black">
+          <img [src]="brand.image" class="" [alt]="brand.slug" />
 
-
-                <img [src]="brand.image" class="" [alt]="brand.slug">
-
-
-                <p class="text-center font-serif pt-1 text-green-500"> {{brand.name}} </p>
-            </div>
-        </ng-template>
-        }
+          <p class="text-center font-serif pt-1 text-green-500">
+            {{ brand.name }}
+          </p>
+        </div>
+      </ng-template>
+      }
     </owl-carousel-o>
-</div>
+  </div>
 
-
-<h1 class=" my-6  text-4xl font-bold  text-center text-green-700">Our Brands</h1>
-<div class="grid max-sm:grid-cols-2 sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-5    gap-3 my-2 ">
+  <h1 class="my-6 text-4xl font-bold text-center text-green-700">Our Brands</h1>
+  <div
+    class="grid max-sm:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 my-2"
+  >
     @for (item of brandData; track $index) {
 
     <div>
-        <div class="group  relative overflow-hidden   border rounded-md border-green-600">
-            <img [src]="item.image" class=" group-hover:scale-110   duration-500 w-full" alt="">
-            <div class="absolute top-0 bottom-0 w-full flex justify-center items-end  duration-500  group-hover:bg-green-600  group-hover:bg-opacity-20
-             bg-green-500 bg-opacity-20">
-                <p class=" group-hover:text-green-600 duration-500  text-green-950  text-lg font-bold"> {{item.name}}
-                </p>
-            </div>
-
+      <div
+        (click)="openModal(item._id)"
+        class="group relative overflow-hidden border rounded-md border-green-600"
+      >
+        <img
+          [src]="item.image"
+          class="group-hover:scale-110 duration-500 w-full"
+          alt=""
+        />
+        <div
+          class="absolute top-0 bottom-0 w-full flex justify-center items-end duration-500 group-hover:bg-green-600 group-hover:bg-opacity-20 bg-green-500 bg-opacity-20"
+        >
+          <p
+            class="group-hover:text-green-600 duration-500 text-green-950 text-lg font-bold"
+          >
+            {{ item.name }}
+          </p>
         </div>
-
+      </div>
     </div>
     }
-
+  </div>
 </div>
+}
+
+<!-- Modal -->
+@if (selectedBrand &&showModal) {
+
+<div
+  (click)="closeModal()"
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+>
+  <div
+    class="relative top-7 z-[51] md:w-1/2 p-6 dark:bg-slate-800 bg-white rounded-lg shadow-lg"
+  >
+    <!-- Close Button -->
+    <button
+      (click)="closeModal()"
+      class="absolute text-gray-500 top-2 right-2 hover:text-gray-700"
+    >
+      <i class="text-xl fa-solid fa-xmark"></i>
+    </button>
+
+    <!-- Brand Image -->
+    <img
+      [src]="selectedBrand?.image"
+      alt=""
+      class="object-contain w-full h-[200px] rounded-md p-5"
+    />
+
+    <!-- Brand Name -->
+    <h2 class="mt-4 text-2xl font-bold text-center text-green-600">
+      {{ selectedBrand?.name }}
+    </h2>
+
+    <!-- Close Button -->
+    <button
+      (click)="closeModal()"
+      class="ms-[34%] w-1/3 py-2 mt-4 text-white transition bg-gray-500 rounded-lg hover:bg-gray-600"
+    >
+      Close
+    </button>
+  </div>
+</div>
+}

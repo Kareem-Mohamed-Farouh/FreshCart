@@ -94,11 +94,22 @@
     @if ( cartData.totalCartPrice !==0){
     <div class="flex justify-center">
       <button
-        class="btn-main capitalize my-4 max-sm:w-[60%] md:w-[30%] block hover:bg-green-700 duration-500"
+        class="btn-main flex capitalize my-4 max-sm:w-[60%] md:w-[30%] items-center font-medium hover:bg-green-700 duration-500"
         [routerLink]="['/checkout', cartData._id]"
       >
         CheckOut
+        <img
+          src="/images/mastercard.webp"
+          class="w-1/5 mx-auto rounded-lg bg-white px-1"
+          alt=""
+        />
+        <img
+          src="/images/paypal.png"
+          class="w-1/5 rounded-lg bg-white px-1"
+          alt=""
+        />
       </button>
+      <div class="flex"></div>
     </div>
     @for (prod of cartData.products; track $index) {
     <div

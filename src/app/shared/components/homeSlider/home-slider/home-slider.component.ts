@@ -45,9 +45,13 @@ export class HomeSliderComponent {
 
   slides: string[] = [
     // '/images/img1.avif',
-    '/images/img2.avif',
-    '/images/img3.avif',
-    '/images/img4.avif',
+
+    '/images/city.avif',
+    '/images/ramadan.gif',
+    '/images/fone.avif',
+    '/images/ramadan2.avif',
+    '/images/fashion.avif',
+    '/images/eltro.avif',
     '/images/img5.avif',
     '/images/img6.avif',
     '/images/img7.avif',

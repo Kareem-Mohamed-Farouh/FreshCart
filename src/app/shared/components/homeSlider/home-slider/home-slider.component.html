@@ -1,27 +1,26 @@
 <div class="flex mb-3 justify-center flex-wrap items-stretch">
-    <div class=" max-sm:w-[100%]  h-[100%] md:w-[79%] ">
-        <owl-carousel-o [options]="customOptions">
-            @for (img of slides; track $index) {
-            <ng-template class="" carouselSlide>
+  <div class="max-lg:w-[100%] h-[100%] lg:w-[79%]">
+    <owl-carousel-o [options]="customOptions">
+      @for (img of slides; track $index) {
+      <ng-template class="" carouselSlide>
+        <!-- <div class="   md:grid-cols-[70%_minmax(0,1fr)]"> -->
+        <img
+          [src]="img"
+          class="w-full rounded max-lg:h-[150px] lg:h-[300px]"
+          [alt]="img"
+        />
+        <!-- </div> -->
+      </ng-template>
 
-                <!-- <div class="   md:grid-cols-[70%_minmax(0,1fr)]"> -->
-                <img [src]="img" class="w-full max-sm:h-[150px] h-[300px]" [alt]="img">
-                <!-- </div> -->
-
-            </ng-template>
-
-            }
-
-        </owl-carousel-o>
+      }
+    </owl-carousel-o>
+  </div>
+  <div class="max-lg:flex max-lg:gap-3 lg:w-[20%]">
+    <div>
+      <img src="/images/reamadann.avif" class="lg:h-[150px] w-full" alt="" />
     </div>
-    <div class=" max-sm:flex   max-sm:gap-3  md:w-[20%]">
-        <div>
-            <img src="/images/slider-image-2.jpeg" class="h-[150px] w-full " alt="">
-        </div>
-        <div>
-
-            <img src="/images/slider-image-1.jpeg" class="h-[150px] w-full" alt="">
-        </div>
-
+    <div>
+      <img src="/images/ramdnieght.avif" class="lg:h-[150px] w-full" alt="" />
     </div>
+  </div>
 </div>

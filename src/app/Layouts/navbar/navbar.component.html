@@ -21,7 +21,7 @@
       id="navbar-sticky"
     >
       <ul
-        class="flex flex-col p-3 font-medium md:space-x-1 rtl:space-x-reverse md:flex-row md:mt-0"
+        class="relative flex flex-col p-3 font-medium md:space-x-1 rtl:space-x-reverse md:flex-row md:mt-0"
       >
         <li>
           <a
@@ -32,6 +32,7 @@
             >Home</a
           >
         </li>
+
         <li>
           <a
             routerLink="/products"
@@ -140,6 +141,7 @@
           >Login
         </a>
         } @else {
+
         <li
           routerLink="/cart"
           routerLinkActive="   text-green-600 rounded  "
@@ -178,6 +180,7 @@
 
           <span class="max-md:hidden font-serif">wishlist </span>
         </li>
+
         <button
           (click)="loguot()"
           class="block max-lg:hidden bg-gray-500 px-3 text-white mas-sm:px-1 max-sm:py-1 py-2 m-2 rounded hover:bg-red-600 dark:text-white transition-all duration-300 hover:text-green-950"
@@ -191,10 +194,11 @@
     </div>
 
     @if(isLogin()){
+
     <button
       data-collapse-toggle="navbar-sticky"
       type="button"
-      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-slate-600"
       aria-controls="navbar-sticky"
       aria-expanded="false"
     >
