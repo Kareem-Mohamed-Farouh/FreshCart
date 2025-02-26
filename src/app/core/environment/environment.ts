@@ -5,5 +5,6 @@ import { inject, PLATFORM_ID } from '@angular/core';
 export enum environment {
   baseUrl = 'https://ecommerce.routemisr.com',
 
-  host = 'http://localhost:4200/',
+  host1 = 'http://localhost:4200/',
+  host = 'https://fresh-cart-s.vercel.app/',
 }

@@ -76,7 +76,7 @@ export class WishlistComponent implements OnInit {
     this.wishlistService.RemoveProductFromWishlist(idprodd).subscribe({
       next: (res) => {
         // console.log(res);
-        this.toastr.info(res.message, 'FreshCart');
+        this.toastr.warning(res.message, 'FreshCart');
         this.getwishlistData();
         this.wishlistService.wishCount.next(res.count);
       },
