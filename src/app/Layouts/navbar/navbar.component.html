@@ -3,7 +3,7 @@
   [class.py-1]="isScroll"
   [class.sm:px-8]="isScroll"
   [class.dark:bg-opacity-80]="isScroll"
-  class="duration-700 transition-all fixed bg-opacity-100 bg-gray-100 dark:bg-slate-900 w-full z-50 top-0 start-0 border-b border-gray-200 dark:border-gray-600"
+  class="duration-700 ease transition-all fixed bg-opacity-100 bg-gray-100 dark:bg-slate-900 w-full z-50 top-0 start-0 border-b border-gray-200 dark:border-gray-600"
 >
   <div
     class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto py-3 max-sm:px-4 sm:px-8"
@@ -92,9 +92,9 @@
       <a
         role="button"
         (click)="loguot()"
-        class="lg:hidden bg-gray-500 px-3 text-white mas-sm:px-1 max-sm:py-1 py-2 m-2 rounded hover:bg-red-600 dark:text-white transition-all duration-300 hover:text-green-950"
-        >LogOut</a
-      >
+        class="md:hidden bg-gray-500 px-3 text-white mas-sm:px-1 max-sm:py-1 py-2 m-2 rounded hover:bg-red-600 dark:text-white transition-all duration-300 hover:text-green-950"
+        >LogOut <i class="ms-1 fa-solid fa-arrow-right-from-bracket"></i
+      ></a>
     </div>
 
     }
@@ -105,7 +105,7 @@
       <div class="items-center flex mx-2">
         @if(!isLogin()){
 
-        <div class="max-sm:hidden items-center flex text-xl gap-5 me-4">
+        <div class="max-md:hidden items-center flex text-xl gap-5 me-4">
           <a href=""
             ><i
               class="dark:text-blue-400 text-blue-700 fa-brands fa-facebook"
@@ -183,10 +183,11 @@
 
         <button
           (click)="loguot()"
-          class="block max-lg:hidden bg-gray-500 px-3 text-white mas-sm:px-1 max-sm:py-1 py-2 m-2 rounded hover:bg-red-600 dark:text-white transition-all duration-300 hover:text-green-950"
+          class="block max-lg:hidden bg-green-800 px-3 text-white mas-sm:px-1 max-sm:py-1 py-2 m-2 rounded hover:bg-red-600 dark:text-white transition-all duration-300 hover:text-green-950"
           type="button"
         >
           LogOut
+          <i class="ms-1 fa-solid fa-arrow-right-from-bracket"></i>
         </button>
 
         }
@@ -230,7 +231,7 @@
   class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
 >
   <div class="relative p-4 w-full max-w-md mx-auto max-h-full">
-    <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+    <div class="relative bg-gray-100 rounded-lg shadow-sm dark:bg-gray-700">
       <div class="p-4 md:p-5 text-center">
         <svg
           class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
@@ -247,7 +248,7 @@
             d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
           />
         </svg>
-        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-500">
           Are you sure you want to LogOut ?
         </h3>
         <button

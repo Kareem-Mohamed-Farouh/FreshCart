@@ -28,6 +28,7 @@ export class CartComponent implements OnInit, OnDestroy {
       next: (res) => {
         // console.log(res.data);
         this.cartData = res.data;
+        this.cartService.cartCount.next(res.numOfCartItems);
       },
     });
   }

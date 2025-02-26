@@ -154,7 +154,8 @@
           </div>
           <button
             [swal]="{
-              title: 'are You Sure to Delet this Item',
+              title:
+                'are You Sure  Do you want to Delete this Item form your Cart',
               showCancelButton: true
             }"
             (confirm)="removeProduct(prod.product._id)"
@@ -170,7 +171,7 @@
 
     <button
       [swal]="{
-        title: 'are You Sure to Delet Cart Item',
+        title: 'are You Sure to Delete All Cart  Items',
         showCancelButton: true
       }"
       (confirm)="deleteCart()"

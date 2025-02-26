@@ -73,7 +73,7 @@
 
   @if(products){
   <div
-    class="grid dark:bg-slate-800 dark:text-white sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 overflow-hidden gap-5"
+    class="grid dark:bg-slate-800 dark:text-white max-sm:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 overflow-hidden gap-5"
   >
     @for (prod of products.slice(2) | search : searchWord ; track prod._id) {
     <div class="card overflow-hidden border border-green-400 rounded-md">
@@ -84,7 +84,7 @@
           <ng-template carouselSlide>
             <img
               [src]="img"
-              class="card-img-top h-[250px] w-full"
+              class="card-img-top max-sm:h-[150px] h-[250px] w-full"
               [alt]="img"
             />
           </ng-template>
@@ -136,7 +136,9 @@
           <span><i class="fa-solid fa-star-half text-yellow-400"></i></span>
           }
 
-          <span class="ms-1 text-gray-500"> ({{ prod.ratingsAverage }} )</span>
+          <span class="ms-1 max-sm:hidden text-gray-500">
+            ({{ prod.ratingsAverage }} )</span
+          >
         </div>
       </div>
       <button
