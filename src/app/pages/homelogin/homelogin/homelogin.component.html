@@ -73,7 +73,7 @@
 
   @if(products){
   <div
-    class="grid dark:bg-slate-800 dark:text-white sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 overflow-hidden gap-5"
+    class="grid dark:bg-slate-800 dark:text-white max-sm:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 overflow-hidden gap-5"
   >
     @for (prod of products.slice(8) | search : searchWord ; track prod._id) {
     <div class="card overflow-hidden border border-green-400 rounded-md">
@@ -134,14 +134,16 @@
           <span><i class="fa-solid fa-star-half text-yellow-400"></i></span>
           }
 
-          <span class="ms-1 text-gray-500"> ({{ prod.ratingsAverage }} )</span>
+          <span class="ms-1 text-gray-500 max-sm:hidden">
+            ({{ prod.ratingsAverage }} )</span
+          >
         </div>
       </div>
       <button
         (click)="getloginMessage('Add product in cart ')"
         class="py-2 bg-green-800 text-white block w-[90%] mx-auto rounded"
       >
-        Add To Cart
+        <i class="fa-solid fa-cart-shopping"></i> Add To Cart
       </button>
     </div>
     }
