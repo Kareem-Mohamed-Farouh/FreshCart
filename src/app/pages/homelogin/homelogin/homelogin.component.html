@@ -14,7 +14,11 @@
           (click)="getloginMessage('to See Categories product ')"
           class="cursor-pointer border"
         >
-          <img [src]="cat.image" class="h-[245px]" [alt]="cat.slug" />
+          <img
+            [src]="cat.image"
+            class="object-contain h-[245px]"
+            [alt]="cat.slug"
+          />
           <p class="text-center font-serif pt-1 text-green-500">
             {{ cat.name }}
           </p>
@@ -80,7 +84,7 @@
           <ng-template carouselSlide>
             <img
               [src]="img"
-              class="card-img-top h-[250px] w-full"
+              class="card-img-top object-contain h-[250px] w-full"
               [alt]="img"
             />
           </ng-template>
