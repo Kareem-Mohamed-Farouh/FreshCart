@@ -9,3 +9,19 @@
 body {
   font-family: "Open Sans", serif;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  // background-color: rgb(19, 196, 3);
+  background: linear-gradient(rgb(211, 245, 208), rgb(19, 196, 3));
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: rgb(227, 241, 220);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-corner {
+  border-radius: 10px;
+}

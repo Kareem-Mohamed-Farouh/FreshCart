@@ -59,7 +59,6 @@ export class RegisterComponent {
       (this.isLoading = true),
         this.authService.sendRegiserForm(this.registerForm.value).subscribe({
           next: (res) => {
-            //sgin in routing by programing
             // console.log(res);
 
             if (res.message === 'success') {
@@ -68,13 +67,7 @@ export class RegisterComponent {
               }, 100);
             }
             this.isLoading = false;
-          },
-          error: (err) => {
-            // window.alert(err.error.message);
-            console.log(err.error.message);
-
-            this.isLoading = false;
-          },
+          }
         });
       // console.log(this.registerForm.value);  result==> {  "name": "kareems",  "email": "aadd@gmail.com",  "password": "Asssssss",  "rePassword": "Asssssss",    "phone": "01122200553" }
     } else {

@@ -1,30 +1,26 @@
-import { WishlistService } from './../../../core/services/wishlist/wishlist.service';
 import { CategoryService } from './../../../core/services/Category/category.service';
+import { WishlistService } from './../../../core/services/wishlist/wishlist.service';
 
 import {
   Component,
   ElementRef,
-  HostListener,
   inject,
   OnDestroy,
   OnInit,
 } from '@angular/core';
 import { ProductsService } from '../../../core/services/products/products.service';
 
+import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { IProducts } from '../../../shared/interfaces/IProducts/iproducts';
-import { CarouselModule } from 'ngx-owl-carousel-o';
-import { OwlOptions } from 'ngx-owl-carousel-o';
 
-import { ICategory } from '../../../shared/interfaces/icategories';
-import { HomeSliderComponent } from '../../../shared/components/homeSlider/home-slider/home-slider.component';
-import { FormsModule, NgModel } from '@angular/forms';
-import { SearchPipe } from '../../../shared/pipes/search/search.pipe';
-import { RouterLink } from '@angular/router';
-import { CartService } from '../../../core/services/cart/cart.service';
+import { FormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { IWhishlist } from '../../../shared/interfaces/whishlist/whishlist';
 import { Subscription } from 'rxjs';
-
+import { CartService } from '../../../core/services/cart/cart.service';
+import { HomeSliderComponent } from '../../../shared/components/homeSlider/home-slider/home-slider.component';
+import { ICategory } from '../../../shared/interfaces/icategories';
+import { IWhishlist } from '../../../shared/interfaces/whishlist/whishlist';
+import { SearchPipe } from '../../../shared/pipes/search/search.pipe';
 @Component({
   selector: 'app-homelogin',
   imports: [CarouselModule, HomeSliderComponent, SearchPipe, FormsModule],
@@ -36,8 +32,6 @@ export class HomeloginComponent implements OnInit, OnDestroy {
   private readonly categoryService = inject(CategoryService);
   private readonly wishlistService = inject(WishlistService);
   toastr = inject(ToastrService);
-  private readonly cartService = inject(CartService);
-  private readonly elementRef = inject(ElementRef);
 
   isInWishlist: boolean = true;
   categoryData!: ICategory[];

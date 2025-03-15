@@ -26,7 +26,7 @@ export class CartComponent implements OnInit, OnDestroy {
   getCartData() {
     this.sub = this.cartService.GetLoggedUserCart().subscribe({
       next: (res) => {
-        // console.log(res.data);
+        // console.log('res', res);
         this.cartData = res.data;
         this.cartService.cartCount.next(res.numOfCartItems);
       },
@@ -63,7 +63,7 @@ export class CartComponent implements OnInit, OnDestroy {
         if (res.message === 'success') {
           this.cartData = {} as ICart;
           this.getCartData();
-          this.cartService.cartCount.next(res.numOfCartItems);
+          this.cartService.cartCount.next(0);
           // this.router.navigate(['/home']);
         }
       },
@@ -73,7 +73,7 @@ export class CartComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.
     //Add 'implements OnDestroy' to the class.
-    console.log('dd');
+    console.log('destroy');
     this.sub.unsubscribe();
   }
 }

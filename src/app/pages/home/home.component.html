@@ -3,7 +3,7 @@
     <app-home-slider></app-home-slider>
 
     <h1
-      class="text-4xl font-semibold capitalize py-3 text-center text-green-800 font-serif"
+      class="text-4xl dark:text-green-500 font-semibold capitalize py-3 text-center text-green-800 font-serif"
     >
       Main Categories
     </h1>
@@ -29,7 +29,7 @@
   </div>
 
   <h1
-    class="text-4xl dark:bg-slate-800 font-semibold capitalize py-3 text-center text-green-800 font-serif"
+    class="text-4xl dark:text-green-600 dark:bg-slate-800 font-semibold capitalize py-3 text-center text-green-800 font-serif"
   >
     Popular products
   </h1>
@@ -65,7 +65,7 @@
       <input
         type="search"
         [(ngModel)]="searchWord"
-        class="w-[100%] p-2 ps-10 text-sm text-green-900 border border-green-300 rounded-lg focus:ring-green-100 focus:border-green-500 dark:bg-green-100 dark:border-green-600 dark:placeholder-green-100 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+        class="w-[100%] p-2 ps-10 text-sm text-green-900 border border-green-300 rounded-lg focus:ring-green-100 focus:border-green-500 dark:bg-green-50 dark:border-green-600 dark:placeholder-green-900 dark:text-green-950 dark:focus:ring-green-500 dark:focus:border-green-500"
         placeholder="Search Product..."
       />
     </div>
@@ -73,7 +73,7 @@
 
   @if(products){
   <div
-    class="grid dark:bg-slate-800 dark:text-white max-sm:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 overflow-hidden gap-5"
+    class="grid dark:bg-slate-800 dark:text-white max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 overflow-hidden gap-5"
   >
     @for (prod of products.slice(2) | search : searchWord ; track prod._id) {
     <div class="card overflow-hidden border border-green-400 rounded-md">
@@ -136,9 +136,7 @@
           <span><i class="fa-solid fa-star-half text-yellow-400"></i></span>
           }
 
-          <span class="ms-1 max-sm:hidden text-gray-500">
-            ({{ prod.ratingsAverage }} )</span
-          >
+          <span class="ms-1 text-gray-500"> ({{ prod.ratingsAverage }} )</span>
         </div>
       </div>
       <button
