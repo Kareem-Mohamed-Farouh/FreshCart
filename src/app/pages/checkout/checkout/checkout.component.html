@@ -12,6 +12,7 @@
         formControlName="phone"
         class="w-full border-green-400 text-gray-900 bg-white border rounded"
         type="tel"
+        placeholder="Enter your phone (Egyption)"
         name="phone"
       />
 
@@ -53,6 +54,7 @@
         class="w-full border-green-600 text-gray-900 bg-white border rounded"
         type="text"
         name="city"
+        placeholder="Enter your city"
       />
 
       @if( checkoutform.get('city')?.getError('required') &&
@@ -91,6 +93,7 @@
         formControlName="details"
         class="w-full border-green-600 text-gray-900 bg-white border rounded"
         name="details"
+        placeholder="Enter your Address (in details)"
       ></textarea>
       @if( checkoutform.get('details')?.getError('required') &&
       checkoutform.get('details')?.touched){
