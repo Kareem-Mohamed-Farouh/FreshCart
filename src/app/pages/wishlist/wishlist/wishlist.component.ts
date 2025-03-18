@@ -32,7 +32,7 @@ export class WishlistComponent implements OnInit {
     dots: true,
     rtl: true,
     navSpeed: 1000,
-    autoplay: true,
+    // autoplay: true,
     autoplayTimeout: 3000,
     autoplayHoverPause: true,
     autoplaySpeed: 2000,
