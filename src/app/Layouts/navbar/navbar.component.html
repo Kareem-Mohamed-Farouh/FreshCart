@@ -141,7 +141,25 @@
           >Login
         </a>
         } @else {
-
+        <div class="flex items-center me-3 size-8 justify-center rounded-lg">
+          <label class="swap swap-rotate mx-2">
+            <input
+              type="checkbox"
+              value="dark"
+              class="theme-controller hidden"
+              (change)="changed($event)"
+              [checked]="isChecked"
+            />
+            <i
+              [class.hidden]="isChecked"
+              class="swap-off icon-[tabler--sun] fa-solid fa-sun text-xl"
+            ></i>
+            <i
+              [class.hidden]="!isChecked"
+              class="swap-on icon-[tabler--moon] fa-solid fa-moon text-xl"
+            ></i>
+          </label>
+        </div>
         <li
           routerLink="/cart"
           routerLinkActive="   text-green-600 rounded  "

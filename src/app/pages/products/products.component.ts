@@ -71,7 +71,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
       next: (res) => {
         console.log(res);
         this.getLogged();
-        this.toastr.success(res.message, 'FreshCart');
+        this.toastr.success(res.message, 'FreshCart', {
+          progressBar: true,
+          timeOut: 1500,
+        });
         this.wishlistService.wishCount.next(res.data.length);
       },
     });
@@ -84,7 +87,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
         next: (res) => {
           console.log(res);
           this.getLogged();
-          this.toastr.error(res.message, 'FreshCart');
+          this.toastr.error(res.message, 'FreshCart', {
+            progressBar: true,
+            timeOut: 1500,
+          });
           this.wishlistService.wishCount.next(res.data.length);
         },
       });

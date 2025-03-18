@@ -13,7 +13,10 @@ export const handlEerrorInterceptor: HttpInterceptorFn = (req, next) => {
         err.error.message !==
         'You are not logged in. Please login to get access'
       ) {
-        toastr.error(err.error.message, 'error Message!');
+        toastr.error(err.error.message, 'error Message!', {
+          progressBar: true,
+          timeOut: 2000,
+        });
       }
       return throwError(() => {
         return err;
