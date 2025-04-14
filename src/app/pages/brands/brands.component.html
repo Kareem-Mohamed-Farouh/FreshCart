@@ -1,22 +1,27 @@
 @if(brandData){
 <div class="relative">
-  <div class="mt-2 md:mt-20 lg:mt-5 border-gray-950 border-y-2 py-2">
+  <h1 class="font-extrabold text-4xl text-center my-2">
+    EXPLORE <span class="text-red-700">OFFICIAL BRAND STORE</span>
+  </h1>
+  <div class="mt-2 md:mt-20 lg:mt-5 border-gray-950 border-y-2">
     <owl-carousel-o class="" [options]="customOptions">
       @for (brand of brandData; track $index) {
       <ng-template carouselSlide>
         <div class="cursor-pointer px-3 py-2 border border-black">
           <img [src]="brand.image" class="" [alt]="brand.slug" />
 
-          <p class="text-center font-serif pt-1 text-green-500">
+          <!-- <p class="text-center font-serif pt-1 text-green-500">
             {{ brand.name }}
-          </p>
+          </p> -->
         </div>
       </ng-template>
       }
     </owl-carousel-o>
   </div>
 
-  <h1 class="my-6 text-4xl font-bold text-center text-green-700">Our Brands</h1>
+  <h1 class="my-6 text-4xl font-extrabold text-center">
+    OUR <span class="text-red-700"> BRANDS</span>
+  </h1>
   <div
     class="grid max-sm:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 my-2"
   >

@@ -8,8 +8,8 @@
         aria-expanded="true"
         aria-controls="accordion-collapse-body-1"
       >
-        <h1 class="text-4xl text-green-500 font-medium text-center capitalize">
-          All Order
+        <h1 class="my-4 capitalize text-4xl font-extrabold text-center">
+          All <span class="capitalize text-red-700">Order</span>
         </h1>
       </button>
     </h2>
@@ -17,7 +17,7 @@
   @for (item of allOrderData; track $index) {
   <h2>
     <div
-      class="flex font-sans items-center mt-2 rounded-t-md flex-wrap text-center justify-between w-full p-5 font-medium rtl:text-right text-gray-700 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 bg-blue-100 dark:bg-gray-900 gap-3"
+      class="flex border-2 border-green-500 font-sans items-center mt-4 rounded-t-md flex-wrap text-center justify-between w-full p-5 font-medium rtl:text-right text-gray-700 border-b-0 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:text-gray-400 bg-blue-100 dark:bg-gray-900 gap-3"
     >
       <span
         class="bg-blue-500 py-2 px-3 capitalize rounded max-sm:font-medium max-sm:w-full text-white"
@@ -26,7 +26,7 @@
       <!-- <span> {{item.user.name}}</span> -->
       <p>
         Total Order Money :
-        <span class="bg-red-500 py-2 px-3 rounded text-white">
+        <span class="bg-red-600 py-2 px-3 font-serif rounded text-white">
           {{ item.totalOrderPrice }}
           EGP</span
         >
@@ -45,7 +45,7 @@
     </div>
   </h2>
   <div>
-    <div class="p-2 border border-b-0 border-gray-200 dark:border-gray-700">
+    <div class="p-2 border-2 border-green-500">
       @for (CartItems of item.cartItems; track $index) {
       <div
         class="flex justify-between rounded mb-2 flex-wrap max-md:flex-col p-5 bg-blue-50 dark:bg-slate-900 cart-product"

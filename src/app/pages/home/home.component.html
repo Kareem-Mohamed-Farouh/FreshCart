@@ -2,10 +2,8 @@
   <div>
     <app-home-slider></app-home-slider>
 
-    <h1
-      class="text-4xl dark:text-green-500 font-semibold capitalize py-3 text-center text-green-800 font-serif"
-    >
-      Main Categories
+    <h1 class="my-6 capitalize text-4xl font-extrabold text-center">
+      Main<span class="capitalize text-red-700">Categories</span>
     </h1>
     <owl-carousel-o [options]="customOptions">
       @for (cat of categoryData; track $index) {
@@ -15,11 +13,11 @@
           class="cursor-pointer"
         >
           <div
-            class="rounded-full size-60 hover:scale-110 border overflow-hidden mx-10 duration-500"
+            class="rounded-full bg-black size-60 hover:scale-110 border overflow-hidden mx-10 duration-500"
           >
             <img [src]="cat.image" class="object-contain" [alt]="cat.slug" />
           </div>
-          <p class="text-center font-serif pt-1 text-green-500">
+          <p class="text-center font-serif pt-1 font-semibold">
             {{ cat.name }}
           </p>
         </div>
@@ -28,12 +26,9 @@
     </owl-carousel-o>
   </div>
 
-  <h1
-    class="text-4xl dark:text-green-600 dark:bg-slate-800 font-semibold capitalize py-3 text-center text-green-800 font-serif"
-  >
-    Popular products
+  <h1 class="my-6 capitalize text-4xl font-extrabold text-center">
+    Popular <span class="capitalize text-red-700">products</span>
   </h1>
-
   <div
     class="flex justify-center items-center dark:bg-slate-800 dark:text-white my-1"
   >
