@@ -76,7 +76,9 @@
     class="grid dark:bg-slate-800 dark:text-white max-sm:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 overflow-hidden gap-5"
   >
     @for (prod of products.slice(2) | search : searchWord ; track prod._id) {
-    <div class="card overflow-hidden border border-green-400 rounded-md">
+    <div
+      class="card overflow-hidden border-2 duration-500 border-green-400 hover:border-green-600 rounded-md"
+    >
       <div class="card-image dark:bg-slate-800 dark:text-white">
         <owl-carousel-o [options]="CardCustomOptions">
           @for (img of prod.images; track $index) {
@@ -84,7 +86,7 @@
           <ng-template carouselSlide>
             <img
               [src]="img"
-              class="card-img-top max-sm:h-[150px] h-[250px] w-full"
+              class="card-img-top max-sm:h-[150px] h-[250px] object-contain w-full"
               [alt]="img"
             />
           </ng-template>

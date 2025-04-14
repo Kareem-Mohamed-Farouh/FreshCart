@@ -277,11 +277,11 @@
     products
   </div>
   <div
-    class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10"
+    class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5"
   >
     @for (prod of products; track $index) {
     <div
-      class="card cursor-pointer overflow-hidden border border-green-400/200 rounded relative"
+      class="card cursor-pointer overflow-hidden border border-green-400 rounded relative"
     >
       <div [routerLink]="['/details', prod._id]" class="card-image">
         <img
@@ -302,32 +302,39 @@
         </h3>
         <p class="card-text">Brand: {{ prod.brand.name }}</p>
 
-        <div class="flex items-center justify-end">
+        <div class="flex items-center">
           @for(star of [1,2,3,4,5].slice(0,prod.ratingsAverage) ;track $index){
           <i class="fa-solid fa-star text-yellow-400"></i>
           } @if( prod.ratingsAverage %1 !==0 ){
           <i class="fa-solid fa-star-half-alt text-yellow-400"></i>
           }
           <span class="text-gray-500">({{ prod.ratingsAverage }})</span>
+          <span
+            class="ms-auto text-sm hover:bg-green-700 duration-500 bg-green-600 text-white p-2 rounded"
+            >Details <i class="fa-solid fa-eye"></i
+          ></span>
         </div>
       </div>
-      <div class="flex justify-between my-2 px-2 items-start relative">
-        <span class="font-bold">price : {{ prod.price }} EGP </span>
+      <div class="flex justify-between mt-2 mb-3 px-2 items-start relative">
+        <span class="font-bold"
+          >price :
+          <span class="text-green-500 font-serif">{{ prod.price }}</span> EGP
+        </span>
 
         <i
           (click)="addProductToWishlist(prod._id)"
-          class="absolute top-0 end-3 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
+          class="absolute top-0 end-3 text-2xl z-20 cursor-pointer text-red-600 fa-regular fa-heart"
         ></i>
         @for (data of wishData; track $index) { @if(wishData !== null){ @if(
         data._id == prod._id ){
         <i
           (click)="RemoveProductFromWishlist(prod._id)"
-          class="absolute top-0 end-3 z-[21] cursor-pointer text-lg text-red-600 fa-solid fa-heart"
+          class="absolute top-0 end-3 z-[21] cursor-pointer text-2xl text-red-600 fa-solid fa-heart"
         ></i>
         } @if(data._id !== prod._id){
         <i
           (click)="addProductToWishlist(prod._id)"
-          class="absolute top-0 end-3 z-20 cursor-pointer text-lg text-red-600 fa-regular fa-heart"
+          class="absolute top-0 end-3 z-20 cursor-pointer text-2xl text-red-600 fa-regular fa-heart"
         ></i>
         } } }
 
