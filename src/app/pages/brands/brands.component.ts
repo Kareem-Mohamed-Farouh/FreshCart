@@ -135,9 +135,15 @@ export class BrandsComponent implements OnInit {
     nav: false,
     // nav: true,
   };
+
   ngOnInit(): void {
+    this.getAllbrands();
+  }
+
+  getAllbrands() {
     this.brandsService.getAllBrands().subscribe({
       next: (res) => {
+        console.log(res);
         this.brandData = res.data;
       },
     });
@@ -145,7 +151,7 @@ export class BrandsComponent implements OnInit {
   getspecificbrands(BrandId: string) {
     this.brandsService.getSpecificBrand(BrandId).subscribe({
       next: (res) => {
-        console.log(res.data);
+        console.log(res);
         this.selectedBrand = res.data;
       },
     });
