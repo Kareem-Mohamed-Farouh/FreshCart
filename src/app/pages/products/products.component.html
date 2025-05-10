@@ -272,6 +272,7 @@
     </div>
   </div>
 </section>
+@if(products){
 <section>
   <h1 class="my-6 text-4xl font-extrabold text-center">
     OUR <span class="text-red-700 capitalize">products</span>
@@ -300,7 +301,6 @@
         <h3 class="card-title font-medium mb-2">
           {{ prod.title.split(" ", 2).join(" ") }}
         </h3>
-        <p class="card-text">Brand: {{ prod.brand.name }}</p>
 
         <div class="flex items-center">
           @for(star of [1,2,3,4,5].slice(0,prod.ratingsAverage) ;track $index){
@@ -415,3 +415,4 @@
     </a>
   </div>
 </section>
+}

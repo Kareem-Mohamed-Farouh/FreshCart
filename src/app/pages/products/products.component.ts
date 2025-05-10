@@ -30,7 +30,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   getproductData(): void {
     this.sub = this.productsService.getAllProducts().subscribe({
       next: (res) => {
-        // console.log(res.data);
+        console.log(res.data);
         this.products = res.data;
       },
     });
@@ -39,7 +39,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   getproductData2(): void {
     this.sub = this.productsService.getAllProducts2().subscribe({
       next: (res) => {
-        // console.log(res.data);
+        console.log(res.data);
         this.products = res.data;
       },
     });
@@ -60,7 +60,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   getLogged() {
     this.sub = this.wishlistService.getLoggedUserWishlist().subscribe({
       next: (res) => {
-        // console.log(res.data);
+        console.log(res.data);
+        console.log(res);
         this.wishData = res.data;
       },
     });

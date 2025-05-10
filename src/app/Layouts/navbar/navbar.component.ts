@@ -46,24 +46,7 @@ export class NavbarComponent {
       if (localStorage.getItem('token')) {
         this.userData = jwtDecode(localStorage.getItem('token')!);
       }
-      // if (localStorage.getItem('token')) {
-      //   this.cartService.numOfCart.subscribe({
-      //     next: (num) => {
-      //       this.cartNum = num;
-      //     },
-      //   });
-      //   this.cartService.totalPrice.subscribe({
-      //     next: (num) => {
-      //       this.totalPrice = num;
-      //     },
-      //   });
-      //   this.cartService.getCart().subscribe({
-      //     next: (res) => {
-      //       this.cartService.numOfCart.next(res.numOfCartItems);
-      //       this.cartService.totalPrice.next(res.data.totalCartPrice);
-      //     },
-      //   });
-      // }
+
       document.documentElement.classList.toggle(
         'dark',
         localStorage.getItem('color-theme') === 'dark' ||
