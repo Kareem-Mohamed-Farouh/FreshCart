@@ -321,10 +321,6 @@
           <span class="text-green-500 font-serif">{{ prod.price }}</span> EGP
         </span>
 
-        <i
-          (click)="addProductToWishlist(prod._id)"
-          class="absolute top-0 end-3 text-2xl z-20 cursor-pointer text-red-600 fa-regular fa-heart"
-        ></i>
         @for (data of wishData; track $index) { @if(wishData !== null){ @if(
         data._id == prod._id ){
         <i

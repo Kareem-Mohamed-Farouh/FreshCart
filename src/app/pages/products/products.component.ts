@@ -51,7 +51,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         console.log(res);
         if (res.status === 'success') {
           this.cartService.cartCount.next(res.numOfCartItems);
-          this.toastr.success(`${res.message}`, 'FreshCart');
+          this.toastr.success(`${res.message}`);
         }
       },
     });
@@ -72,7 +72,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       next: (res) => {
         console.log(res);
         this.getLogged();
-        this.toastr.success(res.message, 'FreshCart', {
+        this.toastr.success(res.message, '', {
           progressBar: true,
           timeOut: 1500,
         });
@@ -88,7 +88,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         next: (res) => {
           console.log(res);
           this.getLogged();
-          this.toastr.error(res.message, 'FreshCart', {
+          this.toastr.error(res.message, '', {
             progressBar: true,
             timeOut: 1500,
           });
